@@ -1,0 +1,104 @@
+<h2>R E L A T Ó R I O S</h2>
+<hr>
+<div class="mynav mt-1">
+
+    <ul class="mycard-pautas bg-ligh">
+        {{#each relGeral}}
+        <li class="text-center bg-secondary p-2 pt-4">
+            <div class="lead text-light">DIÁRIO</div>
+            
+           
+            <hr class="text-light m-1" >
+            <span class="text-light" > {{idCurso.descricao}} </span><br>
+            <span class="text-light" >Registros do dia <span class="fw-bold text-warning" >{{codigo}}</span>  </span><br>
+            <a href="#" class="btn btn-sm bg-warning mt-5" onclick="relDiario()">Ver</a><br>
+
+            
+        </li>
+        <li class="text-center bg-secondary p-2 pt-4">
+            <div class="lead text-light">SEMANAL</div>
+            
+           
+            <hr class="text-light m-1" >
+            <span class="text-light" > {{idCurso.descricao}} </span><br>
+            <span class="text-light" >Registros da semana <span class="fw-bold text-warning" >{{codigo}}</span>  </span><br>
+            <form action="/financas/gerarRelSem" method="post">
+            <input type="hidden" name="dia" value="2023-07-25" id="">
+            <button type="submit" class="btn btn-sm bg-warning mt-5">Ver</button><br>
+            </form>
+
+            
+        </li>
+        <li class="text-center bg-secondary p-2 pt-4">
+            <div class="lead text-light">MENSAL</div>
+            
+           
+            <hr class="text-light m-1" >
+            <span class="text-light" > {{idCurso.descricao}} </span><br>
+            <span class="text-light" >Registros do mês <span class="fw-bold text-warning" >{{codigo}}</span>  </span><br>
+            <a href="/pedagogico/pauta/{{_id}}" class="btn btn-sm bg-warning mt-5">Ver</a><br>
+
+            
+        </li>
+        <li class="text-center bg-secondary p-2 pt-4">
+            <div class="lead text-light">ANUAL</div>
+            
+           
+            <hr class="text-light m-1" >
+            <span class="text-light" > {{idCurso.descricao}} </span><br>
+            <span class="text-light" >Registros do ano <span class="fw-bold text-warning" >{{codigo}}</span>  </span><br>
+            <a href="/pedagogico/pauta/{{_id}}" class="btn btn-sm bg-warning mt-5">Ver</a><br>
+
+            
+        </li>
+
+        {{else}}
+    <div class="h3 text-center mt-3">Nenhuma pauta da 10ª Classe</div>
+    {{/each}}
+    </ul>
+    <hr>
+</div>
+
+{{!-- M O D A I S --}}
+
+<!-- Modal relDiario-->
+
+<form action="/financas/gerarRelDiario" method="post">
+    <div class="modal" tabindex="-1" data-bs-backdrop="static" id="relDiario">
+        <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Selecine o dia</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body input-box">
+                        <div class="card">
+
+
+                        <input type="date" name="dia" id="" required>
+
+                        
+
+                        </div>
+                    </div>
+                    <div class="modal-footer text-center">
+                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Feichar</button>
+                        <button type="submit" class="btn btn-success">Gerar</button>
+                        
+                    </div>
+                </div>
+        </div>
+    </div>
+</form>
+
+<script src="assets/bootstrap.bundle.min.js" class="img-fluid"></script>
+<script>
+    function relDiario() {
+        //alert(id)
+        let el = document.getElementById('relDiario');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
+
+
+</script>

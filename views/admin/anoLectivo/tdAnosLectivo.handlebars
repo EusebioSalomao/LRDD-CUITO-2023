@@ -1,0 +1,50 @@
+<div class="conteiner">
+    <div class="row">
+        <div class="col-6">
+            <h1>Lista dos anos Lectivo</h1>
+
+        </div>
+        <div class="col-6 text-end">
+            <a class="btn btn-info text-light" href="/anosLectivo/add">Criar novo ano</a>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class="mynav mt-1">
+
+    <ul class="mycard">
+        {{#each anosLectivo}}
+        <li class="text-center p-2 pt-4">
+            <div class="lead">Ano Lectivo</div>
+            
+            <div class="h2">
+                {{codigo}}
+            </div>
+            {{#if encerrado}}
+            <a href="/anosLectivo/config/{{_id}}" class="btn btn-sm bg-secondary text-light">Entrar</a><br>
+            {{else}}
+            <a href="/anosLectivo/config/{{_id}}" class="btn btn-sm bg-warning">Configurar</a><br>
+            {{/if}}
+            {{!-- <span>Click em configurar para verificar mais informações</span> --}}
+            {{#if estado}}
+            <p class="p-0 m-0"> {{estado}} </p>
+            {{#if encerrado}}
+
+            <a href="#" class="text-info">.</a>
+            {{else}}
+            
+            <a href="#" class="text-info">.</a>
+            {{/if}}
+            {{else}}
+            <a href="/anosLectivo/activar/{{_id}}">Activar</a><br>
+            <a href="#" class="text-info">.</a>
+            {{/if}}
+        </li>
+
+        {{else}}
+    </ul>
+    <div class="h3 text-center mt-3">Nenhum ano cadastrado</div>
+    {{/each}}
+
+</div>

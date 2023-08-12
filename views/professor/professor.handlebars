@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-7 mx-1">
+        <h1>Professor</h1>
+    </div>
+    <div class="col-4 text-center mark">
+<h1><span class="text-secondary">Perfil</span></h1>
+
+    </div>
+</div>
+<hr>
+<div class="container bg-light p-1">
+    <div class="row">
+        
+            <div class="col-3">
+                <div class="card-body mx-0">
+                   <img src="/uploads/{{professor.foto}}" class="fotoAluno" alt="">
+                </div>
+                <p class="card text-center mt-2" ><a href="#" class="btn btn-sm btn-light" >Editar foto</a></p>
+            </div>
+            <div class="col-5">
+                <p class="my-1 mx-0 mark h3"> {{professor.nome}} </p>
+                <p class="my-1 mx-0"><span class="fw-bold text-secondary" >Função:</span class="italic" > <span> {{professor.funcao}} </span> </p>
+                <p class="my-1 mx-0"><span class="fw-bold text-secondary" >Nº BI:</span class="italic" > {{professor.numBI}}</p>
+                <p class="my-1 mx-0"><span class="fw-bold text-secondary" >Idade:</span class="italic" > {{professor.idade}} anos</p>
+                <p class="my-1 mx-0"><span class="fw-bold text-secondary" >Especialidade:</span class="italic" > {{professor.especialidade}}</p>
+                <p class="my-1 mx-0"><span class="fw-bold text-secondary" >Residente:</span class="italic" > {{professor.morada}}</p>
+                <p class="my-1 mx-0"><span class="fw-bold text-secondary" >Contacto:</span class="italic" > {{professor.contacto}} </p>
+            </div>
+        
+        <div class="col-4 menu">
+            <div class="p-2">
+
+            <h2 class="text-center mybox">MENU</h2>
+            
+            <div class="row menu-item h3 bg-warning text-center p-2"><a href="/professor/turmas/{{professor._id}}" class="btn" >TURMAS</a></div>
+            <div class="row menu-item h3 bg-secondary text-center p-2"><a href="/professor/minipautas/{{professor._id}}" class="btn" >MINI-PAUTAS</a></div>
+            <div class="row menu-item h3 bg-config text-center p-2"><a href="/professor/config" class="btn" >CONFIGURAÇÕES</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row mybox">
+    <div class="col-4 text-center bg-laranja text-light row menu-item "><a class="btn text-light btn-sm" >NOTICIAS</a></div>
+    <div class="col-4 text-center bg-secondary text-light row menu-item "><a class="btn text-light btn-sm" >IMAGENS</a></div>
+    <div class="col-4 text-center bg-verdAlf text-light row menu-item "><a href="/professor/solicitacoesProf" class="btn text-light btn-sm" > SOLICITAÇÕES DE JUSTIFICAÇÃO DE FALTA ({{ocorrencias.length}})</a></div>
+</div>
+<hr>

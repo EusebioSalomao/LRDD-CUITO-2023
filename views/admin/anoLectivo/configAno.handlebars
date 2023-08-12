@@ -1,0 +1,148 @@
+<div class="conteiner">
+  <div class="row">
+    <div class="col-8">
+      <h1> <span class="text-secondary">Ano Lectivo</span> {{anoLectivo.codigo}}</h1>
+
+    </div>
+    {{#if eAdmin}}
+    <div class="col-4 text-end">
+      <a class="btn btn-warning" href="#" onclick="desactivarAnoLectivo()">Encerrar Ano Lectivo</a>
+      <a class="btn btn-secondary" href="/anosLectivo/edit/{{anoLectivo._id}}">Editar</a>
+      <a class="btn btn-danger" onclick="deletarAno()" href="#">Deletar</a>
+    </div>
+    {{else}}
+    {{/if}}
+  </div>
+</div>
+<hr>
+Período: {{anoLectivo.dataInicio}} à {{anoLectivo.dataFim}} <span>Ver calendário</span>
+{{#if eAdmin}}
+<a href="/cursos/add/{{anoLectivo._id}}"><button class="btn btn-info btn-sm text-dark">Adicionar curso</button></a>
+{{#if candidaturaAberta}}
+<a href="/anosLectivo/encerrarCandidatura/{{anoLectivo._id}}"><button class="btn btn-sm btn-secondary">Encerrar
+    candidatura</button></a>
+{{else}}
+<a href="/anosLectivo/abrirCandidatura/{{anoLectivo._id}}"><button class="btn btn-sm btn-secondary">Abrir
+    candidatura</button></a>
+{{/if}}
+{{else}}
+{{/if}}
+<hr>
+
+{{#each cursos}}
+<div class="conteiner mt-1 p-1">
+  <div class="card">
+    <div class="row">
+      <div class="col-6">
+        <div class="card-body bg-warning">
+          <h3>{{descricao}}</h3>
+          <div class="row">
+            <div class="col-6">
+              <div class="h5">Sigla: <span class="lead">{{sigla}}</span></div>
+            </div>
+            <div class="col-6 text-end">
+              <form action="/anosLectivo/gerirCurso/" method="post">
+                <input type="hidden" name="idAno" value="{{idAno}}">
+                <input type="hidden" name="idCurso" value="{{_id}}">
+                {{#if eAdmin}}
+                <button type="submit" class="btn btn-secondary">Gerir curso</button>
+                {{else}}
+                <button type="submit" class="btn btn-secondary">Entrar</button>
+                {{/if}}
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 bg-info">
+        <div class="row text-light">
+          <div class="col-6 text-end h3 p-4 text-light">Vagas:</div>
+          <div class="col-2 py-4 text-success">
+            <span class="h2 text-light">{{numVagas}}</span>
+
+          </div>
+          <div class="col-4 text-center p-4">
+
+            <span class="text-center"><a class="btn btn-light  p-0 btn-sm"
+                href="/cursos/editar/{{_id}}">Editar</a></span>
+            <span class=""><a class="btn btn-danger btn-sm mt-1 px-1" href="/cursos/excluir/{{_id}}">Excluir
+                curso</a></span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{else}}
+<div class="h3 text-center lead p-4">Nenhum curso adicionado</div>
+{{/each}}
+
+<!-- Modal Deletar ano lectivo-->
+
+<div class="modal" tabindex="-1" data-bs-backdrop="static" id="deletarAno">
+  <div class="modal-dialog modal-dialog-centered">
+    <form action="/anosLectivo/deletar" method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Voce tem certesa?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body input-box-filtro">
+          <span class="text-danger">Se apagar o ano lectivo as informações referente ao mesmo estarão comprometidas, ou
+            perderá todas. Se deseja apagar clica em "Deletar"</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <input type="hidden" name="idAno" value="{{anoLectivo._id}}">
+          <button type="submit" class="btn btn-primary">Deletar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal Desativar ano lectivo-->
+
+<div class="modal" tabindex="-1" data-bs-backdrop="static" id="desactivarAnoLectivo">
+  <div class="modal-dialog modal-dialog-centered">
+    <form action="/anosLectivo/desativar" method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Voce tem certesa?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body input-box-filtro">
+          <span class="text-danger">Se desativar o ano lectivo não se poderá alterar as informações nem adicionar mais.
+            Se deseja apagar clica em "Encerrar ano lectivo"</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <input type="hidden" name="idAno" value="{{anoLectivo._id}}">
+          <button type="submit" class="btn btn-primary">Encerrar anoLectivo</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script src="assets/bootstrap.bundle.min.js" class="img-fluid"></script>
+<script>
+  function deletarAno() {
+
+    let el = document.getElementById('deletarAno');
+    let minha_modal = new bootstrap.Modal(el);
+    minha_modal.show();
+  }
+
+  function desactivarAnoLectivo() {
+
+    let el = document.getElementById('desactivarAnoLectivo');
+    let minha_modal = new bootstrap.Modal(el);
+    minha_modal.show();
+  }
+
+
+
+</script>

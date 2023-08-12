@@ -1,0 +1,142 @@
+<div class="conteiner">
+    <div class="row">
+        <div class="col-9 p-2">
+            <h1><span class="text-secondary" >Ano Lectivo:</span> {{anoLectivo.codigo}} </h1>
+
+        </div>
+        <div class="col-3 text-center p-2">
+            <h2 class="mark" ><a href="#" onclick="gerearPauta()" class="btn btn-lg btn-warning">Gerar pauta</a></h2>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class="mynav mt-1">
+
+    <ul class="mycard-pautas bg-light">
+        {{#each pautas10}}
+        <li class="text-center bg-secondary p-2 pt-4">
+            <div class="lead text-light">PAUTAS</div>
+            
+            <div class="h5 mt-4">
+                <span class="text-light" >{{idClasse.designacao}}</span>
+            </div>
+            <hr class="text-light m-1" >
+            <span class="text-light" > {{idCurso.descricao}} </span><br>
+            <span class="text-light" >Turma: <span class="fw-bold text-warning" >{{codigo}}</span>  </span><br>
+            <a href="/pedagogico/pauta/{{_id}}" class="btn btn-sm bg-warning mt-5">Ver Pautas</a><br>
+
+            
+        </li>
+
+        {{else}}
+    </ul>
+    <div class="h3 text-center mt-3">Nenhuma pauta da 10ª Classe</div>
+    {{/each}}
+    <hr>
+    <ul class="mycard-pautas bg-light">
+        {{#each pautas11}}
+        <li class="text-center bg-secondary p-2 pt-4">
+            <div class="lead text-light">PAUTA</div>
+            
+            <div class="h5 mt-4">
+                <span class="text-light" >{{classe.designacao}}</span>
+            </div>
+            <hr class="text-light m-1" >
+            <span class="text-light" > {{curso.descricao}} </span><br>
+            <span class="text-light" >Turma: <span class="fw-bold text-warning" >{{turma.codigo}}</span>  </span><br>
+            <a href="/anosLectivo/config/{{_id}}" class="btn btn-sm bg-warning mt-5">Ver Pauta</a><br>
+
+            
+        </li>
+
+        {{else}}
+    </ul>
+    <div class="h3 text-center mt-3">Nenhuma pauta 11ª Classe</div>
+    {{/each}}
+    <hr>
+    <ul class="mycard-pautas bg-light">
+        {{#each pautas12}}
+        <li class="text-center bg-secondary p-2 pt-4">
+            <div class="lead text-light">PAUTA</div>
+            
+            <div class="h5 mt-4">
+                <span class="text-light" >{{classe.designacao}}</span>
+            </div>
+            <hr class="text-light m-1" >
+            <span class="text-light" > {{curso.descricao}} </span><br>
+            <span class="text-light" >Turma: <span class="fw-bold text-warning" >{{turma.codigo}}</span>  </span><br>
+            <a href="/anosLectivo/config/{{_id}}" class="btn btn-sm bg-warning mt-5">Ver Pauta</a><br>
+
+            
+        </li>
+
+        {{else}}
+    </ul>
+    <div class="h3 text-center mt-3">Nenhuma pauta da 12ª Classe</div>
+    {{/each}}
+    <hr>
+
+</div>
+
+
+
+
+{{!-- M O D A I S --}}
+
+<!-- Modal gerearPauta-->
+
+<form action="/pedagogico/gerarPauta" method="post">
+    <div class="modal" tabindex="-1" data-bs-backdrop="static" id="gerearPauta">
+        <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Gerar pauta</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body input-box">
+                        <div class="card">
+
+                       <div class="text-danger text-center p-2" > <span class="fw-bold" >ATENÇÃO!</span> <br> Antes de gerar uma pauta certifica-se de que todos professores lançaram notas finais do período correspondente</div>
+
+                        <select name="trimestre" id="" required>
+                            <option value="selecionar">Seleciona o Trimestre</option>
+                            <option value="trimestre1">Primeiro Trimestre</option>
+                            <option value="trimestre2">Segundo Trimestre</option>
+                            <option value="trimestre3">Terceiro Trimestre</option>
+                            <option value="pautaFinal">Pauta Final</option>
+                        </select>
+
+                        <label for="turma">Turma:</label>
+                        <select name="turma" id="" required>
+                            <option value="selecionar">Selecionar</option>
+                            {{#each turmas}}
+                            <option value="{{_id}}"> {{codigo}} </option>
+                            {{else}}
+                            <p>Nenhuma turma registrada</p>
+                            {{/each}}
+                        </select>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer text-center">
+                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Feichar</button>
+                        <button type="submit" class="btn btn-danger">Gerar</button>
+                        
+                    </div>
+                </div>
+        </div>
+    </div>
+</form>
+
+<script src="assets/bootstrap.bundle.min.js" class="img-fluid"></script>
+<script>
+    function gerearPauta() {
+        //alert(id)
+        let el = document.getElementById('gerearPauta');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
+
+
+</script>

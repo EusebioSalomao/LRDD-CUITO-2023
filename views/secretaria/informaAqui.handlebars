@@ -1,0 +1,82 @@
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="display-3 p-5  bg-light text-center">Bem vindo</div>
+    </div>
+    <div class="carousel-item">
+      <div class="display-3 p-5 text-light bg-info text-center">Informe-se Aqui!</div>
+    </div>
+    <div class="carousel-item">
+      <div class="display-3 p-5 text-light bg-secondary text-center">Em que podemos ajudar?</div>
+    </div>
+    <div class="carousel-item">
+      <div class="display-3 p-5 text-light bg-secondary text-center"> Agradecemos por nos visitar</div>
+    </div>
+    <div class="carousel-item">
+      <div class="display-3 p-2 text-light bg-secondary text-center">Saiba mais sobre nós
+        <br>
+        <a href="/sobreNos" class="btn btn-sm btn-light">Click aqui</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="conteiner pb-5">
+  <div class="row ms-5">
+    <div class="col-4 menu-item2 fw-bold text-light p-3 m-1 text-center h3 bg-warning " onclick="solicitar()"><a
+        href="#">Solicitações</a></div>
+    <div class="col-3 menu-item2 fw-bold text-light p-3 m-1 text-center h3 bg-info "> <a
+        href="/noticias" class="text-light"> Informações</div></a>
+    <div class="col-4 menu-item2 fw-bold text-light p-3 m-1 text-center h3 bg-secondary "> <a
+        href="/secretaria/servicosInfo" class="text-light">Nossos Serviços</div></a>
+  </div>
+  <hr>
+  
+</div>
+
+
+{{!-- M O D A I S --}}
+
+<!-- Modal -->
+
+<div class="modal" tabindex="-1" data-bs-backdrop="static" id="solicitar">
+  <div class="modal-dialog modal-dialog-centered">
+    <form action="/informaAqui/solicitar" method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Escolhe o tipo de solicitação</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body input-box-filtro">
+
+          <select name="tipo" id="">
+            <option value="selecionar">Selecionar</option>
+            <option value="RUPE">Solicitação da RUPE</option>
+            <option value="emicaoDeDec">Emição de Declaração</option>
+            <option value="justficativo">Justificação de Faltas</option>
+            <option value="emicaoDeCertif">Emição de Certificado</option>
+            <option value="decServiço">Declaração de serviço</option>
+          </select>
+
+          <input type="text" name="numBI" placeholder="Digite o número do Bilhete de identidade" id="" required>
+
+        </div>
+        <hr>
+        <div class=" text-center p-3">
+          <a href="#"><button type="submit" class="btn btn-primary">Enviar solicitação</button></a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script src="assets/bootstrap.bundle.min.js" class="img-fluid"></script>
+<script>
+  function solicitar() {
+
+    let el = document.getElementById('solicitar');
+    let minha_modal = new bootstrap.Modal(el);
+    minha_modal.show();
+  }
+</script>

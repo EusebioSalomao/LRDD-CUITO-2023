@@ -1,0 +1,180 @@
+{{#if msg}}
+<div class="alert alert-success text-center">{{msg}}</div>
+{{else}}
+{{/if}}
+{{#if exist}}
+<div class="alert alert-danger text-center">{{exist}}</div>
+{{else}}
+{{/if}}
+<h1><span class="text-secondary">Turma:</span> {{turma.codigo}} - {{classe.designacao}} / {{curso.descricao}}</h1>
+<hr>
+<div class="bg-secondary p-2">
+    <div class="row">
+<div class="col-9">
+
+
+    {{#if naoVagas}}
+    <a href="#" class=" btn btn-sm btn-danger">Sem vaga!</a>
+    <span class="text-light text-end"> Lista de alunos da turma {{turma.codigo}} do curso 
+        {{curso.descricao}} do ano {{ano.codigo}} </span>
+    {{else}}
+
+    {{#if classe10}}
+    <a href="#" class=" btn btn-sm mybtn-color2" onclick="matricular()">+ Matricular novo aluno</a>
+    {{else}}
+    <a href="#" class=" btn btn-sm btn-primary" onclick="addTurma()">+ Confirmar matricula</a>
+    {{/if}}
+    <span class="text-light text-center"> Lista de alunos da turma {{turma.codigo}}, curso
+        {{curso.descricao}} do ano {{ano.codigo}} </span>
+
+    {{/if}}
+</div>
+<div class="col-3 text-end">
+    <a href="#"><button class="btn btn-sm btn-light" >Alunos</button></a>
+    <a href="/turmas/pturma/{{turma._id}}"><button class="btn btn-sm mybtn-color" >Professores</button></a>
+    
+</div>
+    </div>
+</div>
+<hr>
+<div class="conteiner">
+    <div class="row lead">
+        <div class="col-2"></div>
+        <div class="col-5">Nome completo</div>
+        <div class="col-2">Idade</div>
+        <div class="col-3">Genero</div>
+    </div>
+    <ol>
+        {{#each alunos}}
+        <li>
+
+            <div class="card p-2 mt-2">
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-2">FOTO</div>
+                        <div class="col-5 h4">{{nome}}</div>
+                        <div class="col-2">{{idade}} anos</div>
+                        <div class="col-2">{{genero}}</div>
+                        <div class="col-1"><a href="/alunos/ficha/{{_id}}"
+                                class="bg-info text-light p-2 btn btn-sm">i</a></div>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+        {{else}}
+        {{/each}}
+
+    </ol>
+</div>
+<hr>
+
+
+
+
+
+<!-- Modal Matricular-->
+
+<div class="modal" tabindex="-1" data-bs-backdrop="static" id="matricular">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Nova Matricula: - {{classe10}}</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="container">
+                {{#each candMatricular}}
+                <form action="/turmas/novaMatricula" method="post">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3 h2"> FOTO </div>
+                                <div class="col-3"> {{nome}} </div>
+                                <div class="col-3"> {{idade}} anos </div>
+                                <div class="col-3">
+                                    <input type="hidden" name="idCandidato" value="{{_id}}">
+                                    <input type="hidden" name="idTurma" value="{{idTurma}}">
+                                    <button type="submit" class="btn btn-dark btn-sm">Matricular</button>
+                                    <a href="#" class="btn btn-info btn-sm text-light">+ informações</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {{else}}
+                <h3 class="text-danger">Não ha mais candidato admitido neste curso</h3>
+                {{/each}}
+            </div>
+
+            <div class="modal-footer text-center">
+                <div class="lead text-info">Apenas candidatos admitidos constam nessa lista</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal addProfessor-->
+
+<div class="modal" tabindex="-1" data-bs-backdrop="static" id="addProfessor">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Selecionar Professor: - {{classe10}} {{turma.codigo}} </h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="container">
+                {{#each candMatricular}}
+                <form action="/turmas/novaMatricula" method="post">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3 h2"> FOTO </div>
+                                <div class="col-3"> {{nome}} </div>
+                                <div class="col-3"> {{idade}} anos </div>
+                                <div class="col-3">
+                                    <input type="hidden" name="idCandidato" value="{{_id}}">
+                                    <input type="hidden" name="idTurma" value="{{idTurma}}">
+                                    <button type="submit" class="btn btn-dark btn-sm">Matricular</button>
+                                    <a href="#" class="btn btn-info btn-sm text-light">+ informações</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {{else}}
+                <h3 class="text-danger">Não ha mais candidato admitido neste curso</h3>
+                {{/each}}
+            </div>
+
+            <div class="modal-footer text-center">
+                <div class="lead text-info">Apenas candidatos admitidos constam nessa lista</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/bootstrap.bundle.min.js" class="img-fluid"></script>
+<script>
+    function matricular() {
+
+        let el = document.getElementById('matricular');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
+
+    function addProfessor() {
+
+        let el = document.getElementById('addProfessor');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
+
+
+
+
+</script>

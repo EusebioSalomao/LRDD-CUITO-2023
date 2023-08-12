@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-4 offset-4 mt-4">
+            <h1 class="text-center">SWGELFC</h1>
+            {{#if error}}
+            <div class="alert alert-danger">{{error}}</div>
+            {{else}}
+            {{/if}}
+            <hr>
+            <div class="card p-3">
+                <h3>Login:</h3>
+                <div class="card-body">
+                    <form action="/user/login" method="post">
+                        <input type="text" name="username" placeholder="Usuário" class="form-control" required>
+                        <input type="password" name="senha" placeholder="Senha" class=" mt-2 form-control" required>
+
+                        <button type="submit" class="btn btn-success mt-2 ">Logar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

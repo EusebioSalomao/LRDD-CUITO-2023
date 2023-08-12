@@ -1,0 +1,211 @@
+<div class="conteiner">
+    <div class="row m-0">
+        <div class="col-9 text-center p-2 m-0">
+            <h2 class="m-0 bg-secondary p-4 text-light" > {{dadosTurma.codigo}}: {{dadosTurma.idClasse.designacao}} - {{dadosTurma.idCurso.descricao}} </h2>
+
+        </div>
+        <div class="col-3 text-center m-0 p-2">
+            <h2 class="mark py-4 m-0 text-secondary" >PAUTAS</h2>
+        </div>
+    </div>
+</div>
+<hr>
+{{!-- P R I M E I R O   T R I M E S T R E  --}}
+<div class="container">
+    <div class="pe-3 lead text-sm mark text-end">Primeiro Trimestre</div>
+    <div class="logo text-center mt-3"><img src="/img/logor.png" alt=""></div>
+    <div class="text-center">
+        <p class="m-1">República de Angola</p>
+        <p class="m-1">Governo da Província do Bié</p>
+        <p class="m-1">Administração Municipal de Catabola</p>
+        <p class="fw-bold" >LICEU FELIZBERTO DOMINGO NGUNGA</p>
+
+        <div class="mt-3 lead">PAUTA DO Iº TRIMESTRE</div>
+    </div>
+    <div class="row"><div class="col-6" > {{dadosTurma.idClasse.designacao}} </div> <div class="col-5 text-end" > <span class="fw-bold" >Período:</span> <span> {{dadosTurma.periodo}} </span> </div> </div>
+    <div class=""> <span class="fw-bold">Turma: </span> <span> {{dadosTurma.codigo}} </span></div>
+    <table class="table table-bordered table-sm">
+        <thead class="table-secondary">
+            <tr>
+                <td>N/O</td>
+                <td>Nome Completo</td>
+            {{#each disciplinas}}
+            <td> {{disciplina}} </td>
+            {{else}}
+            {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            <ol>
+
+            {{#each pautaT1}}
+
+                <tr>
+                    <td><li></li></td>
+                    <td> {{nome}} </td>
+                {{#each notas.notas}} 
+                <td> {{nota}} </td>
+                {{else}}
+                {{/each}}
+                 </tr>
+            {{else}}
+            {{/each}}
+                
+            </ol>
+        </tbody>
+    </table>
+    <div class="text-center"><a href="/relatorios/pautaTrimestral/{{dadosTurma._id}}" class="btn btn-secondary">Gerar PDF - Pauta Iº Trimestre</a></div>
+    <hr>
+</div>{{!-- FIM Iº TRIMESTRE--}}
+
+
+{{!-- S E G U N D O   T R I M E S T R E  --}}
+<div class="container">
+    <div class="pe-3 lead text-sm mark text-end">Segundo Trimestre</div>
+    <div class="logo text-center mt-3"><img src="/img/logor.png" alt=""></div>
+    <div class="text-center">
+        <p class="m-1">República de Angola</p>
+        <p class="m-1">Governo da Província do Bié</p>
+        <p class="m-1">Administração Municipal de Catabola</p>
+        <p class="fw-bold" >LICEU FELIZBERTO DOMINGO NGUNGA</p>
+
+        <div class="mt-3 lead">PAUTA DO IIº TRIMESTRE</div>
+    </div>
+    <div class="row"><div class="col-6" > {{dadosTurma.idClasse.designacao}} </div> <div class="col-5 text-end" > <span class="fw-bold" >Período:</span> <span> {{dadosTurma.periodo}} </span> </div> </div>
+    <div class=""> <span class="fw-bold">Turma: </span> <span> {{dadosTurma.codigo}} </span></div>
+    <table class="table table-bordered table-sm">
+        <thead class="table-secondary">
+            <tr>
+                <td>N/O</td>
+                <td>Nome Completo</td>
+            {{#each disciplinas}}
+            <td> {{disciplina}} </td>
+            {{else}}
+            <div class="lead text-light text-center bg-danger">Ainda não foi gerada a pauta do IIIª Trimestre</div>
+            {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            <ol>
+
+            {{#each pautaT2}}
+
+                <tr>
+                    <td><li></li></td>
+                    <td> {{nome}} </td>
+                {{#each notas.notas}} 
+                <td> {{nota}} </td>
+                {{else}}
+                {{/each}}
+                 </tr>
+            {{else}}
+            <div class="lead text-light text-center bg-danger">Ainda não foi gerada a pauta do IIIª Trimestre</div>
+            {{/each}}
+                
+            </ol>
+        </tbody>
+    </table>
+    <div class="text-center"><a href="/relatorios/pautaTrimestralII/{{dadosTurma._id}}" class="btn btn-secondary">Gerar PDF - Pauta IIº Trimestre</a></div>
+    <hr>
+</div>{{!-- FIM IIº TRIMESTRE--}}
+
+{{!-- T E R C E I R O   T R I M E S T R E  --}}
+<div class="container">
+    <div class="pe-3 lead text-sm mark text-end">Terceiro Trimestre</div>
+    <div class="logo text-center mt-3"><img src="/img/logor.png" alt=""></div>
+    <div class="text-center">
+        <p class="m-1">República de Angola</p>
+        <p class="m-1">Governo da Província do Bié</p>
+        <p class="m-1">Administração Municipal de Catabola</p>
+        <p class="fw-bold" >LICEU FELIZBERTO DOMINGO NGUNGA</p>
+
+        <div class="mt-3 lead">PAUTA DO IIIº TRIMESTRE</div>
+    </div>
+    <div class="row"><div class="col-6" > {{dadosTurma.idClasse.designacao}} </div> <div class="col-5 text-end" > <span class="fw-bold" >Período:</span> <span> {{dadosTurma.periodo}} </span> </div> </div>
+    <div class=""> <span class="fw-bold">Turma: </span> <span> {{dadosTurma.codigo}} </span></div>
+    <table class="table table-bordered table-sm">
+        <thead class="table-secondary">
+            <tr>
+                <td>N/O</td>
+                <td>Nome Completo</td>
+            {{#each disciplinas}}
+            <td> {{disciplina}} </td>
+            {{else}}
+            {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            <ol>
+
+            {{#each pautaT3}}
+
+                <tr>
+                    <td><li></li></td>
+                    <td> {{nome}} </td>
+                {{#each notas.notas}} 
+                <td> {{nota}} </td>
+                {{else}}
+                {{/each}}
+                 </tr>
+            {{else}}
+            <div class="lead text-light text-center bg-danger">Ainda não foi gerada a pauta do IIIª Trimestre</div>
+            {{/each}}
+                
+            </ol>
+        </tbody>
+    </table>
+    <div class="text-center"><a href="/relatorios/pautaTrimestralIII/{{dadosTurma._id}}" class="btn btn-secondary">Gerar PDF - Pauta IIIº Trimestre</a></div>
+    <hr>
+</div>{{!-- FIM IIIº TRIMESTRE--}}
+
+{{!-- P A U T A   F I N A L  --}}
+<div class="container">
+    <div class="pe-3 lead text-sm mark text-end">Pauta Final</div>
+    <div class="logo text-center mt-3"><img src="/img/logor.png" alt=""></div>
+    <div class="text-center">
+        <p class="m-1">República de Angola</p>
+        <p class="m-1">Governo da Província do Bié</p>
+        <p class="m-1">Administração Municipal de Catabola</p>
+        <p class="fw-bold" >LICEU FELIZBERTO DOMINGO NGUNGA</p>
+
+        <div class="mt-3 lead text-danger">PAUTA FINAL</div>
+    </div>
+    <div class="row"><div class="col-9" > {{dadosTurma.idClasse.designacao}} </div> <div class="col-3" > <span class="fw-bold" >Período:</span> <span> {{dadosTurma.periodo}} </span> </div> </div>
+    <div class="row mb-0 pb-0"><div class="col-9 mb-0 pb-0" > <span>Turma: </span> <span class="fw-bold mb-0 pb-0">{{dadosTurma.codigo}}</span> </div> <div class="col-3 mb-0 pb-0" > <span class="fw-bold mb-0 pb-0" >Ano Lectivo:</span> <span> {{anoLectivo.codigo}} </span> </div> </div>
+    <table class="table mt-0 table-bordered table-sm">
+        <thead class="table-secondary mt-1">
+            <tr>
+                <td>N/O</td>
+                <td>Nome Completo</td>
+            {{#each disciplinas}}
+            <td> {{disciplina}} </td>
+            {{else}}
+            {{/each}}
+            <td><span class="fw-bold">OBS</span></td>
+            </tr>
+        </thead>
+        <tbody>
+            <ol>
+
+            {{#each pautaF}}
+
+                <tr>
+                    <td><li></li></td>
+                    <td> {{nome}} </td>
+                {{#each notas.notas}} 
+                <td> {{nota}} </td>
+                {{else}}
+                {{/each}}
+                <td> {{estado}} </td>
+                 </tr>
+            {{else}}
+            <div class="lead text-light text-center bg-danger">Ainda não foi gerada a Pauta Final</div>
+            {{/each}}
+                
+            </ol>
+        </tbody>
+    </table>
+    <div class="text-center"><a href="/relatorios/pautaFinal/{{dadosTurma._id}}" class="btn btn-secondary">Gerar PDF - Pauta Final</a></div>
+    <hr>
+</div>{{!-- FIM--}}
+

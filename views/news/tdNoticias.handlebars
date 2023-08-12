@@ -1,0 +1,46 @@
+<h2 class="text-center">I N F O R M A Ç Õ E S</h2>
+<hr>
+{{!-- Noticia principal --}}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <img src="/uploads/{{notiPrincipal.capa}}" alt="CAPA" class="capa fotoAluno">
+                <div class="capa-span text-light p-5">
+                    <div class="h3 fw-bold">
+                        {{notiPrincipal.title}}
+                    </div>
+                    <div class="lead mb-5 pb-5">Saiba mais sobre esta notícia e outras nesta pagina. Para ver mais clica em ler
+                        completo</div>
+                    <br class="mt-5">
+                    <div class="mt-5"></div>
+                    <div class="h2 fw-bold text-italic mt-5 text-end">Liceu - Catabola/Bié</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<hr>
+<div class="container ms-4 mt-3">
+    <div class="row">
+        {{!-- Uma informação --}}
+        {{#each noticias}}
+        <div class="col-5 p-2 mx-2">
+            <div class="row mb-1 py-0"> <img src="/uploads/{{capa}}" alt="CAPA"> </div>
+            <hr class="pb-0 m-0">
+            <div class="row mt-1 py-0 px-2 bg-light p-2 text-justify">
+                {{text}}
+                <div class="text-end">
+                    <form action="/noticias/likes" method="post">
+                        <input type="hidden" name="idNews" value="{{_id}}" id="">
+                        <button type="submit"> reagir</button> {{likes.length}}
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        {{/each}}
+
+    </div>
+</div>

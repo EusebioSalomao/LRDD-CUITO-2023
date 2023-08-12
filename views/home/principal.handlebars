@@ -1,0 +1,204 @@
+<div class="container mybox principal">
+    <div class="row mt-0 text-end">
+        <div class="col mt-0">
+             <img src="/img/" alt="imagem Principal">
+            <figcaption>
+                <div class="display-5 ms-5 p-5">
+                    Liceu nº 290 - REI NDUDUMA/CUITO <br>
+                    <p></p>
+                    <span>A opçao ideal para ingressares ao ensino superior em apenas 3 anos e com uma multipla
+                        escolha de cursos em áreas sociais e tecnicas profissionais, você só encontra aqui!</span><br>
+                    <a href="#" class="p-3 mybox">Saiba mais</a>
+                </div>
+
+                <div class="inscricao-aberta">
+                    <div class="container">
+                        <div class="row">
+                            {{#if candidaturaAberta}}
+                            <div class="col-7">
+                                <span class="lead ">Inscrições Aberta! </span>
+
+                            </div>
+                            <div class="col-5 mx-5">
+                                <a href="/candidatos/add" class="p-0 bg-none"><button
+                                        class="btn btn-lg btn-warning ms-1">Inscreva-te</button></a>
+
+                            </div>
+                            {{else}}
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+
+            </figcaption>
+        </div>
+        
+        
+    </div>
+</div>
+<div class="row principal2">
+    <div class="col-3 me-2 mt-5 ms-0 px-0 pt-5">
+        <h3 class="fw-bold">Cursos</h3>
+        <div class="cursos">
+            Ministramos com profissionalismo e dedicação os cursos de ciências <a href="" class="fw-bold">fisicas
+                biológica</a>, <a href="#" class="fw-bold">ciências humanas</a> e <a href="#"
+                class="fw-bold">econômica-jurídicas</a>
+        </div>
+
+    </div>
+    <div class="col-4 ms-2">
+        <img src="/img/turma.JPG" class="fotoAluno" alt="imagem Principal">
+    </div>
+    <div class="col-4 ms-3">
+        <img src="/img/turma22.JPG" class="fotoAluno" alt="imagem Principal">
+    </div>
+</div>
+<hr>
+<div class="display-6 mark p-2">O que já fizemos e continuamos a fazer</div>
+<hr>
+<div class="container">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active altura">
+      <img src="/img/f5.JPG" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Tecnologias de Informação</h5>
+        <p>Procuramos crescer a medida que as Tecnologias de informação avançam</p>
+      </div>
+    </div>
+    <div class="carousel-item altura">
+      <img src="/img/f4.JPG" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Dominar as TICs</h5>
+        <p>Procuramos crescer a medida que as Tecnologias de informação avançam</p>
+
+      </div>
+    </div>
+    <div class="carousel-item altura">
+      <img src="/img/f13.JPG" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Saúde físia</h5>
+        <p>Apostamos em actividades físicas que contribuam na saúde de nossos alunos.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+    <hr>
+    <div class="container mark mybox p-3 ">
+        <div class="display-6">Alguns resultados de nosso trabalho</div>
+        <div class="row mt-4 ms-5">
+            <div class="col-2">
+                <div class="card-body mx-0">
+                    {{!-- Guile --}}
+                    <img src="/img/BG.jpg" class="foto-resultados" alt="">
+                </div>
+            </div>
+            <div class="col-3 ms-0 me-5 text-justify ps-0">
+                <div class="h3">Guilerme C. Hossi</div>
+                Estudou nesta instituição no curso de Físicas Biológicas.
+                <br>
+                Actualmente é licenciado em Matemática e trabalha como xxxx na administração munocipal de Catabola
+            </div>
+            <div class="col-2 ms-5">
+                <div class="card-body mx-0">
+                    {{!-- Felizmina --}}
+                    <img src="/img/foto-superacao/felizmina.JPG" class="foto-resultados" alt="">
+                </div>
+            </div>
+            <div class="col-3 ms-0 me-1 text-justify ps-0">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dolorum ab quam totam doloremque
+                eius vitae.
+            </div>
+        </div>
+        <div class="row mt-3 ms-5">
+            <div class="col-2">
+                <div class="card-body mx-0">
+                    {{!-- wanga --}}
+                    <img src="/img/foto-superacao/wanga.jpg" class="foto-resultados" alt="">
+                </div>
+            </div>
+            <div class="col-3 ms-0 me-5 text-justify ps-0">
+                <div class="h3">José Wanga</div>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium illum alias nemo sapiente totam
+                odit!
+            </div>
+            <div class="col-2 ms-5">
+                <div class="card-body mx-0">
+                    {{!-- Usa --}}
+                    <img src="/img/foto-superacao/mayco.JPG" class="foto-resultados" alt="">
+                </div>
+            </div>
+            <div class="col-3 ms-0 me-1 text-justify ps-0">
+                <div class="h3">Abreu Mayco</div>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dolorum ab quam totam doloremque
+                eius vitae.
+            </div>
+        </div>
+        <div class="row mt-3 ms-5">
+            <div class="col-2">
+                <div class="card-body mx-0">
+                    {{!-- Fina --}}
+                    <img src="/img/foto-superacao/usa.jpg" class="foto-resultados" alt="">
+                </div>
+            </div>
+            <div class="col-3 ms-0 me-5 text-justify ps-0">
+                <div class="h3">Fernando Cassela</div>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium illum alias nemo sapiente totam
+                odit!
+            </div>
+            <div class="col-2 ms-5">
+                <div class="card-body mx-0">
+                    {{!-- rosa --}}
+                    <img src="/img/foto-superacao/rosa.JPG" class="foto-resultados" alt="">
+                </div>
+            </div>
+            <div class="col-3 ms-0 me-1 text-justify ps-0">
+                <div class="h3">Rosalina Muvembe</div>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla dolorum ab quam totam doloremque
+                eius vitae.
+            </div>
+        </div>
+        <div class="row mt-3 ms-5">
+            <div class="col-2">
+                <div class="card-body mx-0">
+                    {{!-- Forlam --}}
+                    <img src="/img/foto-superacao/forlan.jpg" class="foto-resultados" alt="">
+                </div>
+            </div>
+            <div class="col-3 ms-0 me-5 text-justify ps-0">
+                <div class="h3">Alberto Bumba</div>
+                Estudou neste instituição no curso de Ciências Físicas Biológicas.
+                <br>
+                Actualmente é licenciado em Química pela Escola superior pedagógica do Bié.
+            </div>
+            <div class="col-2 ms-5">
+                <div class="card-body mx-0">
+                    {{!-- Felizmuna --}}
+                    <img src="/img/foto-superacao/felizmina.JPG" class="foto-resultados" alt="">
+                </div>
+            </div>
+            <div class="col-3 ms-0 me-1 text-justify ps-0">
+                <div class="h3">Felizmina Bráulio</div>
+                Estudou nesta instituição no curso de ciências Físicas Biológicas
+                <br>
+                Actualmente é Licenciada em Física pela Escola superior pedagógica.
+            </div>
+        </div>
+        
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,215 @@
+{{#if msg}}
+<div class="alert alert-success text-center">{{msg}}</div>
+{{else}}
+{{/if}}
+{{#if exist}}
+<div class="alert alert-danger text-center">{{exist}}</div>
+{{else}}
+{{/if}}
+<h1><span class="text-secondary">Turma:</span> {{turma.codigo}} - {{classe.designacao}} / {{curso.descricao}}</h1>
+<hr>
+<div class="bg-dark p-2">
+    <div class="row">
+        <div class="col-10">
+
+
+
+            <a href="#" class=" btn btn-sm mybtn-color2" onclick="addProfessor()">+ Docente</a>
+            <span class="text-light text-center"> Professores da turma {{turma.codigo}} do curso de
+                {{curso.descricao}} do ano {{ano.codigo}} </span>
+
+        </div>
+        <div class="col-2">
+            <a href="/turmas/turma/{{turma._id}}"><button class="btn btn-sm btn-light">Alunos</button></a>
+            <a href="#"><button class="btn btn-sm mybtn-color">Professores</button></a>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="container">
+    <div class="row lead">
+        <div class="col-2"></div>
+        <div class="col-5">Nome completo</div>
+        <div class="col-2">Disciplina</div>
+        <div class="col-3">Especialidade</div>
+    </div>
+
+    {{#each professoresDaT}}
+    <div class="card p-2 mt-2">
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-2">FOTO</div>
+                <div class="col-5 h4">{{nome}}</div>
+                <div class="col-2">Idade</div>
+                <div class="col-1"><a href="/alunos/ficha/{{_id}}" class="bg-info text-light p-2 btn btn-sm">i</a></div>
+            </div>
+        </div>
+    </div>
+
+    {{else}}
+    <hr>
+    <div class="h5 text-center">Nenhum professor selecionado</div>
+    {{/each}}
+    <div class="mt-3 text-end"><a href="#" onclick="addDisciplina()"><button class="btn btn-sm btn-warning" >Adicionar disciplina</button></a></div>
+
+
+</div>
+
+
+
+
+<!-- Modal Matricular-->
+
+<div class="modal" tabindex="-1" data-bs-backdrop="static" id="matricular">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Nova Matricula: - {{classe10}}</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="container">
+                {{#each candMatricular}}
+                <form action="/turmas/novaMatricula" method="post">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3 h2"> FOTO </div>
+                                <div class="col-3"> {{nome}} </div>
+                                <div class="col-3"> {{idade}} anos </div>
+                                <div class="col-3">
+                                    <input type="hidden" name="idCandidato" value="{{_id}}">
+                                    <input type="hidden" name="idTurma" value="{{idTurma}}">
+                                    <button type="submit" class="btn btn-dark btn-sm">Matricular</button>
+                                    <a href="#" class="btn btn-info btn-sm text-light">+ informações</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {{else}}
+                <h3 class="text-danger">Não ha mais candidato admitido neste curso</h3>
+                {{/each}}
+            </div>
+
+            <div class="modal-footer text-center">
+                <div class="lead text-info">Apenas candidatos admitidos constam nessa lista</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal addProfessor-->
+
+<div class="modal" tabindex="-1" data-bs-backdrop="static" id="addProfessor">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Selecionar Professor: - {{classe10}} {{turma.codigo}} </h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="container">
+                <form action="/turmas/addProfessor" method="post">
+                    <div class="card">
+                        <div class="card-body">
+                                
+                                    <label for="professor">Professor:</label>
+                                    <select name="idProfessor" class="form-control" id="">
+                                        <option value="selecionar">Selecionar</option>
+                                        {{#each professores}}
+                                        <option value="{{_id}}"> {{nome}} </option>
+                                        {{else}}
+                                        <option value="0">Nenhum professor registrado</option>
+                                        {{/each}}
+                                    </select>
+
+                                    <select name="nomeDisciplina" class="form-control mt-3" id="">
+                                        <option value="selecionar">Seleciona a disciplina</option>
+                                        {{#each disciplinas}}
+                                        <option value="{{nomeDisciplina}}"> {{nomeDisciplina}} </option>
+                                        {{else}}
+                                        <option value="0">Nenhuma disciplina registrada</option>
+                                        {{/each}}
+                                    </select>
+
+                                
+                                <div class="col-2">
+                                    <input type="hidden" name="idTurma" value="{{idTurma}}">
+                                    <input type="hidden" name="idClasse" value="{{classe._id}}">
+                                    <input type="hidden" name="idCurso" value="{{curso._id}}">
+                                    <input type="hidden" name="idAno" value="{{ano._id}}">
+                                    <button type="submit" class="btn btn-dark btn-sm mt-2">Adicionar</button>
+                                </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer text-center">
+                <div class="lead text-info">Apenas funcionarios professores constam nessa lista</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal addDisciplina-->
+
+<form action="/disciplinas/add" method="post">
+    <div class="modal" tabindex="-1" data-bs-backdrop="static" id="addDisciplina">
+        <div class="modal-dialog modal-dialog-centered">
+            <form action="/candidatos/consultar" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Adicionar nova disciplina</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body input-box">
+                        <label for="nomeDisciplina">Nome da disciplina:</label>
+                        <input type="text" name="nomeDisciplina" required>
+                        <label for="tempoLectivo">Tempo lectivo por semana:</label>
+                        <input type="text" name="tempoLectivo" required>
+                        
+                        <input type="hidden" name="idClasse" value="{{classe._id}}">
+                        <input type="hidden" name="idCurso" value="{{curso._id}}">
+                        <input type="hidden" name="idAno" value="{{ano._id}}">
+
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                    </div>
+                    <div class="modal-footer text-center">
+                        {{!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Feichar</button>
+                        --}}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</form>
+
+<script src="assets/bootstrap.bundle.min.js" class="img-fluid"></script>
+<script>
+    function matricular() {
+
+        let el = document.getElementById('matricular');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
+
+    function addProfessor() {
+
+        let el = document.getElementById('addProfessor');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
+
+function addDisciplina() {
+        let el = document.getElementById('addDisciplina');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
+
+
+</script>

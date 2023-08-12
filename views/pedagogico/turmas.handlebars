@@ -1,0 +1,100 @@
+{{#if msg}}
+<div class="alert alert-success text-center">{{msg}}</div>
+{{else}}
+{{/if}}
+{{#if exist}}
+<div class="alert alert-danger text-center">{{exist}}</div>
+{{else}}
+{{/if}}
+<h1><span class="text-secondary">Ano Lectivo:</span> {{anoLectivo.codigo}} </h1>
+<hr>
+<div class="bg-secondary">
+    <div class="row">
+
+        <div class="col-10">
+            <a href="/pedagogico"><button class=" btn btn-sm btn-warning">Voltar</button> </a>
+            <span class="text-light text-center"> LISTA DAS TURMAS POR CLASSES</span>
+
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class="h2 mark text-center fw-bold">Turmas - 10ª Classe</div>
+<div class="container">
+<ol class="list-group list-group-numbered">
+    <div class="container">
+        <div class="mynav mt-1">
+
+            <ul class="mycardTurmas">
+
+                {{#each turmas10}}
+                <li class="text-center p-2 pt-4">
+                    <div class="lead">Turma</div>
+                    <div class="h2">
+                        {{codigo}}
+                    </div>
+                    <a href="/turmas/turma/{{_id}}" class="btn btn-sm bg-dark text-light">Entrar</a><br>
+                    <span>Click para ver mais informações</span>
+                </li>
+
+                {{else}}
+            </ol>
+            <div class="h3 text-center mt-3">Nenhuma turma da 10ª classe foi criada</div>
+            {{/each}}
+
+        </div>
+        <hr>
+<div class="h2 mark text-center fw-bold">Turmas - 11ª Classe</div>
+<div class="container">
+<ol class="list-group list-group-numbered">
+    <div class="container">
+        <div class="mynav mt-1">
+
+            <ul class="mycardTurmas">
+
+                {{#each turmas11}}
+                <li class="text-center p-2 pt-4">
+                    <div class="lead">Turma</div>
+                    <div class="h2">
+                        {{codigo}}
+                    </div>
+                    <a href="/turmas/turma/{{_id}}" class="btn btn-sm bg-dark text-light">Entrar</a><br>
+                    <span>Click para ver mais informações</span>
+                </li>
+
+                {{else}}
+            </ol>
+            <div class="h3 text-center mt-3">Nenhuma turma da 11ª classe foi criada</div>
+            {{/each}}
+
+        </div>
+        <hr>
+
+        {{!-- TURMAS DA 12ª CLASSE --}}
+<div class="h2 mark text-center fw-bold">Turmas - 12ª Classe</div>
+<div class="container">
+<ol class="list-group list-group-numbered">
+    <div class="container">
+        <div class="mynav mt-1">
+
+            <ul class="mycardTurmas">
+
+                {{#each turmas12}}
+                <li class="text-center p-2 pt-4">
+                    <div class="lead">Turma</div>
+                    <div class="h2">
+                        {{codigo}}
+                    </div>
+                    <a href="/turmas/turma/{{_id}}" class="btn btn-sm bg-dark text-light">Entrar</a><br>
+                    <span>Click para ver mais informações</span>
+                </li>
+
+                {{else}}
+            </ol>
+            <div class="h3 text-center mt-3">Nenhuma turma da 12ª classe foi criada</div>
+            {{/each}}
+
+        </div>
+        <hr>
+        

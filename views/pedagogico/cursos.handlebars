@@ -1,0 +1,32 @@
+<h1>Cursos cadastrados</h1>
+<hr>
+<a href="/pedagogico"><button class="btn btn-primary"><< Voltar</button></a>
+{{#each cursos}}
+<div class="conteiner mt-1 p-1" >
+    <div class="card">
+       <div class="row">
+        <div class="col-8">
+             <div class="card-body bg-warning">
+            <h3>{{descricao}}</h3>
+            <div class="h5">Sigla: <span class="lead">{{sigla}}</span></div>
+        </div>
+       </div>
+        <div class="col-4 bg-secondary">
+            <div class="row text-light">
+                <div class="col-4 text-center h3 py-4 text-light">Vagas:</div>
+                <div class="col-3 py-4 text-success">
+                    <span class="h2 text-light" >{{vagas}}</span>
+                    <span class="text-secondary" >---</span>
+                    <span class="text-light my-2 h2" >|</span>
+                </div>
+                <div class="col-5 text-center p-4">
+                    <span class="text-light h3" > {{turmas}}  Turmas</span>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{{else}}
+{{/each}}

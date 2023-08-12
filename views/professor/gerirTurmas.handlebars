@@ -1,0 +1,116 @@
+{{#if msg}}
+<div class="alert alert-success text-center">{{msg}}</div>
+{{else}}
+{{/if}}
+{{#if exist}}
+<div class="alert alert-danger text-center">{{exist}}</div>
+{{else}}
+{{/if}}
+<div class="row">
+    <div class="col-7 bg-secondary text-light mx-1">
+        <h1>Professor: {{professor.nome}} </h1>
+    </div>
+    <div class="col-4 text-center mark">
+<h1><span class="text-secondary">Turmas:</span> {{curso.descricao}} / {{ano.codigo}}</h1>
+
+    </div>
+</div>
+<hr>
+<div class="bg-secondary">
+    <div class="row">
+
+    <div class="col-11">
+    <a href="/professor/{{professor.usuario}}"><button class=" btn btn-sm bg-laranja text-light">Voltar ao perfil</button> </a>
+    <span class="text-light text-center" > Lista de todas as turmas e classe a lecionar durante o ano Lectivo {{ano.codigo}} - Apenas as turmas que o professor da aula</span> 
+
+    </div>
+    {{!-- <div class="col-2 text-end"><a href="#" onclick="addDisciplina()"><button class="btn btn-sm btn-warning" >Adicionar disciplina</button></a></div> --}}
+    </div>
+</div>
+<hr>
+
+
+<ol class="list-group list-group-numbered">
+    <div class="container">
+        <div class="mynav mt-1">
+
+        <ul class="mycardTurmas">
+
+       {{#each turmas}}
+            <li class="text-center p-2 pt-4">
+                <div class="lead">Turma</div>
+                <div class="h2">
+                {{codigo}}
+                </div>
+                <a href="/professor/listaAlunos/{{_id}}" class="btn btn-sm bg-dark text-light">Entrar</a><br>
+                <span>Click para ver mais informações</span>
+            </li>    
+    
+{{else}}
+        </ul>
+<div class="h3 text-center mt-3">Nenhuma turma adicionada</div>
+{{/each}} 
+        </div>
+
+
+
+ 
+
+<!-- Modal addDisciplina-->
+
+<form action="/disciplinas/add" method="post">
+    <div class="modal" tabindex="-1" data-bs-backdrop="static" id="addDisciplina">
+        <div class="modal-dialog modal-dialog-centered">
+            <form action="/candidatos/consultar" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Adicionar nova disciplina</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body input-box">
+                        <label for="nomeDisciplina">Nome da disciplina:</label>
+                        <input type="text" name="nomeDisciplina" required>
+                        <label for="tempoLectivo">Tempo lectivo por semana:</label>
+                        <input type="text" name="tempoLectivo" required>
+                        
+                        <input type="hidden" name="idClasse" value="{{classe._id}}">
+                        <input type="hidden" name="idCurso" value="{{curso._id}}">
+                        <input type="hidden" name="idAno" value="{{ano._id}}">
+
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                    </div>
+                    <div class="modal-footer text-center">
+                        {{!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Feichar</button>
+                        --}}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</form>
+
+<script src="assets/bootstrap.bundle.min.js" class="img-fluid"></script>
+<script>
+    function addClasse() {
+
+        let el = document.getElementById('addClasse');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
+
+    function addTurma() {
+        let el = document.getElementById('addTurma');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
+
+
+    function addDisciplina() {
+        let el = document.getElementById('addDisciplina');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
+
+
+
+</script>
