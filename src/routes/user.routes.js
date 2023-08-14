@@ -7,12 +7,12 @@ import multer from 'multer'
 import { eAdmin, veryLogin } from "../../helpers/eAdmin.js";
 const upload = multer({storage: storage});
 
-router.get('/allUsers', allUsers)
+router.get('/allUsers',veryLogin, eAdmin, allUsers)
 router.get('/login', telaLogin)
 router.post('/login', login)
 router.get('/logout', veryLogin, logout)
-router.get('/add', wAddUser)
-router.post('/add', upload.single('fotoUser'), validFildUser, addUser)
+router.get('/add', veryLogin, eAdmin, wAddUser)
+router.post('/add', veryLogin, eAdmin, upload.single('fotoUser'), validFildUser, addUser)
 router.get('/deletUser/:id', eAdmin, veryLogin, deletUser)
 router.get('/editUser/:id', eAdmin, veryLogin, wEditUser)
 router.post('/editUser', eAdmin, veryLogin, editUser)

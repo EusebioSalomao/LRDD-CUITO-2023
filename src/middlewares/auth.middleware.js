@@ -9,7 +9,7 @@ import bcrypt from 'bcryptjs'
 import Usuario from '../models/user.modles.js'
 
 
-
+/* ANTIGO */
 export const authMidleware = function(passport){
 
     passport.use(new localStrategy({usernameField: 'username', passwordField: 'senha'}, (username, senha, done)=>{
@@ -27,27 +27,36 @@ export const authMidleware = function(passport){
             })
         })
     }))
+    function findUserById(id) {
+        
+        Usuario.findById(id).then((user)=>{
+            id = user._id
+        }).catch((err)=>{
+            console.log('Erro ao pesquisar usuario: '+err)
+        });
+        return id;
+    }
 
-    passport.serializeUser(function(user, cb) {
-        process.nextTick(function() {
-          return cb(null, {
-            id: user.id,
-            username: user.username,
-            senha: user.senha,
-            categoria: user.categoria,
-            eAdmin: user.eAdmin,
-            picture: user.picture
-          });
-        });
-      });
+    passport.serializeUser((user, done) => {
+        done(null, user);
+    });
       
-      passport.deserializeUser(function(user, cb) {
-        process.nextTick(function() {
-          return cb(null, user);
-        });
-      });
+    passport.deserializeUser((id, done) => {
+        try {
+            const user = findUserById(id);
+            console.log(user)
+            done(null, user);
+        } catch (err) {
+            done(err, null);
+        }
+    });
 }
+
 /* 
+
+
+
+
 //Verificar se está logado
 export const veryLogin = (req, res, next) => {
 
@@ -83,4 +92,51 @@ export const veryLogin = (req, res, next) => {
     }
 
 
+} */
+
+/* NOA CONFIG */
+/* 
+export const authMidleware = function (passport) {
+
+    function findUser(username) {
+        return Usuario.find(user => user.username === username);
+    }
+
+    function findUserById(id) {
+        return Usuario.find(user => user._id === id);
+    }
+    passport.serializeUser((user, done) => {
+        done(null, user._id);
+    });
+
+    passport.deserializeUser((id, done) => {
+        try {
+            const user = findUserById(id);
+            done(null, user);
+        } catch (err) {
+            done(err, null);
+        }
+    });
+
+    passport.use(new LocalStrategy({
+        usernameField: 'username',
+        passwordField: 'password'
+    },
+        (username, password, done) => {
+            try {
+                const user = findUser(username);
+
+                // usuário inexistente
+                if (!user) { return done(null, false) }
+
+                // comparando as senhas
+                const isValid = bcrypt.compareSync(password, user.password);
+                if (!isValid) return done(null, false)
+
+                return done(null, user)
+            } catch (err) {
+                done(err, false);
+            }
+        }
+    ));
 } */

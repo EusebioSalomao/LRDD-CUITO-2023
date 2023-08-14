@@ -94,8 +94,9 @@ const app = express()
 //sessão
 app.use(session({
     secret: 'tfcispb2023',
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 30 * 60 * 1000 }//30min
 }))
 app.use(passport.initialize())
 app.use(passport.session())

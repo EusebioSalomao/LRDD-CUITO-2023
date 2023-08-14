@@ -77,6 +77,7 @@ export const addTurma = async (req, res) => {
             const ano = await findAnoLectivoById(idAno)
             const curso = await findCursoByIdService(idCurso)
             const msg = "Turma adicionada com sucesso"
+            //res.redirect('/turmas/turma/'+idTurma)
             res.render('admin/cursos/gerirCurso', { curso, ano, classes, msg })
         } else {
             const ano = await findAnoLectivoById(idAno)

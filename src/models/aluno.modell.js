@@ -20,7 +20,8 @@ const Aluno = new Schema({
     },
     dataNascimento: {
         type: Date,
-        required: true
+        required: true,
+        default: Date.now()
     },
     foto: {
         type: String,
@@ -57,7 +58,7 @@ const Aluno = new Schema({
     proficao: {
         type: String,
         default: '',
-        required: true
+        require: true
     },
     contactoEncarregado: {
         type: String,

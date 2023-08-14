@@ -6,7 +6,13 @@
 <div class="alert alert-danger text-center">{{exist}}</div>
 {{else}}
 {{/if}}
+<div class="row">
+    <div class="col-11">
+
 <h1><span class="text-secondary">Turma:</span> {{turma.codigo}} - {{classe.designacao}} / {{curso.descricao}}</h1>
+    </div>
+    <div class="col-1 pt-3"><a href="#" class="btn btn-sm btn-primary " onclick="addAluno()">+Aluno</a></div>
+</div>
 <hr>
 <div class="bg-secondary p-2">
     <div class="row">
@@ -157,6 +163,39 @@
         </div>
     </div>
 </div>
+<!-- Modal addAluno-->
+
+<div class="modal" tabindex="-1" data-bs-backdrop="static" id="addAluno">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">{{classe.designacao}} - {{turma.codigo}} </h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="container">
+                <form action="/admin/addAluno" method="post">
+                    <div class="card">
+                        <div class="card-body">
+                            <input type="text" name="nome" placeholder="Insira o nome do aluno" id="" class="form-control my-2" required>
+                            </div>
+                        </div>
+                    </div>
+            <div class="text-center p-3">
+                            <input type="hidden" name="idTurma" value="{{turma._id}}" id="">
+                            <input type="hidden" name="numBI" value="000Provisorio" id="">
+                            <input type="hidden" name="classe" value="{{classe.designacao}}" id="" class="form-control my-2">
+                            <input type="hidden" name="idClasse" value="{{classe._id}}" id="" class="form-control my-2">
+                            <input type="hidden" name="curso" value="{{curso.descricao}}" id="" class="form-control my-2">
+                            <input type="hidden" name="idCurso" value="{{curso._id}}" id="" class="form-control my-2">
+                <button type="submit" class="btn btn-success" >Adicionar</button>
+            </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script src="assets/bootstrap.bundle.min.js" class="img-fluid"></script>
 <script>
@@ -167,6 +206,12 @@
         minha_modal.show();
     }
 
+    function addAluno() {
+
+        let el = document.getElementById('addAluno');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
     function addProfessor() {
 
         let el = document.getElementById('addProfessor');
