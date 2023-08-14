@@ -34,6 +34,6 @@ export const veryLogin = (req, res, next) => {
         return next();
     }
     return next();
-    req.flash('error_msg', 'Inicie sessão para aceder a área desejada!')
-    res.redirect('/user/login')
+    /* req.flash('error_msg', 'Inicie sessão para aceder a área desejada!')
+    res.redirect('/user/login') */
 }
