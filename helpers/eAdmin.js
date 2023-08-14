@@ -33,7 +33,6 @@ export const veryLogin = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     }
-    return next();
-    /* req.flash('error_msg', 'Inicie sessão para aceder a área desejada!')
-    res.redirect('/user/login') */
+    req.flash('error_msg', 'Inicie sessão para aceder a área desejada!')
+    res.redirect('/user/login')
 }
