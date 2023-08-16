@@ -2,15 +2,13 @@
     position: relative;
     top: -1.5rem;
     width: 100%;
-    margin-right: -3.8rem;
     padding: 0rem;
 }
 
 .principal img {
     position: relative;
-    width: 92%;
+    width: 100%;
     height: 65%;
-    margin-right: -0.5rem;
     box-shadow: 1px 1px 1px black
 }
 .principal figcaption{
@@ -23,7 +21,6 @@
     height: 65%;
     padding: 10px;
     transition: background 1s;
-    margin-left: 6.2rem;
 }
 .principal figcaption:hover {
     background-color: rgba(0, 0, 0, .7);
@@ -62,9 +59,9 @@
     color: rgba(128, 112, 49, 0.98);
     
 }
-.principal aside h3 {
+/* .principal aside h3 {
     text-shadow: 1px 1px 4px rgba(189, 155, 15, 0.98);
-}
+} */
 
 .principal aside p {
     margin: 0rem;
@@ -100,7 +97,7 @@
 .principal2 {
     position: absolute;
     top: 27rem;
-    margin-left: 14rem;
+    margin-left: 8rem;
     text-align: justify;
 }
 .cursos{
@@ -147,5 +144,5 @@
 }
 
 .altura {
-    height: 30rem;
+    height: 15rem;
 }

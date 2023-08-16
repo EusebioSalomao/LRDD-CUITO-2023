@@ -14,3 +14,5 @@ export const findTurmasByIdClassedService = (idClasse) => Turma.find({idClasse: 
 
 export const findTurmasByIdAno = (idAno) => Turma.find({idAno: idAno}).lean().populate("idClasse").populate('idCurso')
 
+export const findTurmaByIdAndDeleteSerice = (idTurma) => Turma.findByIdAndDelete(idTurma)
+

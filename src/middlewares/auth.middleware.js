@@ -27,37 +27,27 @@ export const authMidleware = function(passport){
             })
         })
     }))
-    function findUserById(id) {
-        
-        Usuario.findById(id).then((user)=>{
-            id = user._id
-        }).catch((err)=>{
-            console.log('Erro ao pesquisar usuario: '+err)
-        });
-        return id;
-    }
 
-    passport.serializeUser((user, done) => {
-        done(null, user);
-    });
-      
+    passport.serializeUser((usuario, done)=>{
+        done(null, usuario.id)
+    })
     passport.deserializeUser((id, done) => {
-        try {
-            const user = findUserById(id);
-            console.log(user)
-            done(null, user);
-        } catch (err) {
-            done(err, null);
-        }
-    });
+        let usuario = []
+        let err= []
+
+        Usuario.findById(id).then((user)=>{
+            usuario = user
+            done(null, usuario)
+            //console.log(usuario)
+        }).catch((err)=>{
+            err = err
+        })
+    })
 }
-
-/* 
-
-
 
 
 //Verificar se está logado
+/* 
 export const veryLogin = (req, res, next) => {
 
     try {

@@ -1,5 +1,6 @@
 import { createAlunoService } from "../services/aluno.service.js"
 import { findAnoLectivoByEstadoService } from "../services/anoLectivo.service.js"
+import { findTurmaByIdAndDeleteSerice } from "../services/turma.service.js"
 import { findUserByIdService } from "../services/user.service.js"
 
 export const admin = async (req, res) => {
@@ -54,6 +55,19 @@ export const addAluno = async (req, res) => {
 
         req.flash('success_msg', 'Aluno adicionado com sucesso!')
         res.redirect('/turmas/turma/'+idTurma)
+    } catch (error) {
+        res.status(500).send({ mesage: error.mesage })
+    }
+}
+
+export const eliminarTurma = async (req, res) => {
+    try {
+        const idTurma = req.body.idTurma
+
+        await findTurmaByIdAndDeleteSerice(idTurma)
+
+        req.flash('error_msg', 'Turma eliminada com exito!')
+        res.redirect('/pedagogico/turmas')
     } catch (error) {
         res.status(500).send({ mesage: error.mesage })
     }
