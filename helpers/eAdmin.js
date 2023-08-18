@@ -30,7 +30,7 @@ export const eFinanc = (req, res, next) => {
 }
 
 export const veryLogin = async (req, res, next) => {
-    if ( await req.user) {
+    if ( await req.isAuthenticated()) {
         return next();
     }
     req.flash('error_msg', 'Inicie sessão para aceder a área desejada!')
