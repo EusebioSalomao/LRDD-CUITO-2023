@@ -1,7 +1,8 @@
-import { createUserService, findAllUsers, findByUsernameService, findUserBIdAndUpdate, findUserBuNameService, findUserByIdAndDelet, findUserByIdService } from "../services/user.service.js"
+import { createUserService, findAllUsers, findByUsernameService, findUserBIdAndUpdate, findUserBuNameService, findUserByIdAndDelet, findUserByIdService, generateToken } from "../services/user.service.js"
 import { authMidleware } from '../middlewares/auth.middleware.js'
 import passport from 'passport'
 import { findAlunoByIdUser } from "../services/aluno.service.js";
+import Cookies from "js-cookie";
 
 export const allUsers = async (req, res) => {
     try {
@@ -25,14 +26,18 @@ export const login = async (req, res, next) => {
         const username = req.body.username;
         const user = await findUserBuNameService(username)
         // return res.send({user})
-        
-        if(user == null){
+
+        if (user == null) {
             //return res.send('Usuario não achado!')
             req.flash('error_msg', 'Usuario ou senha invalido')
             res.redirect('/user/login')
-            
-        }else{
+
+        } else {
             const id = user._id
+            const token = generateToken(user._id)
+            //return res.send({token})
+            Cookies.set("token", token, {expires: 1})
+
             //return res.send('Usuario existente')
             if (user.eAdmin == 1) {
                 await authMidleware(passport)
@@ -49,8 +54,8 @@ export const login = async (req, res, next) => {
                         failureRedirect: '/user/login',
                         failureFlash: true
                     })(req, res, next)
-                }else{
-                    
+                } else {
+
                     if (user.categoria == 'aluno') {
                         const aluno = await findAlunoByIdUser(id)
                         const idAluno = aluno._id
@@ -87,7 +92,7 @@ export const login = async (req, res, next) => {
                             failureFlash: true
                         })(req, res, next)
                     }
-                      else {
+                    else {
                         // res.send('Usuario ou senha invalida')
 
                         /* await authMidleware(passport)
@@ -98,13 +103,13 @@ export const login = async (req, res, next) => {
                         })(req, res, next) */
                     }
                 }
-                
-            }  
-            
+
+            }
+
         }
-        } catch (error) {
-            res.status(500).send({ mesage: error.mesage })
-        }
+    } catch (error) {
+        res.status(500).send({ mesage: error.mesage })
+    }
 }
 
 export const logout = (req, res, next) => {
@@ -121,7 +126,7 @@ export const wAddUser = (req, res) => {
 }
 export const addUser = async (req, res) => {
     try {
-        if(req.file){
+        if (req.file) {
             //return res.send('Sucesso')
             const usuario = req.body.username
             const senha = req.body.senha;
@@ -142,41 +147,41 @@ export const addUser = async (req, res) => {
                     categoria: categoria,
                     foto: req.file.filename
                 }
-                
+
                 //return res.send({novoUsuario})
                 switch (categoria) {
                     case "admin":
                         novoUsuario.eAdmin = 1
                         break;
-                        
-                        case "secretario":
-                            novoUsuario.eAdmin = 2
-                            break;
 
-                        case "pedagogico":
-                            novoUsuario.eAdmin = 3
-                            break;
+                    case "secretario":
+                        novoUsuario.eAdmin = 2
+                        break;
 
-                        case "financeiro":
-                            novoUsuario.eAdmin = 4
-                            break;
-                        
-                        default:
-                            break;
-                        }
-                        
-                        console.log(novoUsuario)
-                        await createUserService(novoUsuario);
-                        req.flash('success_msg', 'Usuário cadastrado com sucesso!')
-                        res.redirect('/user/allUsers')
-                    }
-                    
-                }else{
+                    case "pedagogico":
+                        novoUsuario.eAdmin = 3
+                        break;
 
-                    return res.send('Falha ao carregar foto')
+                    case "financeiro":
+                        novoUsuario.eAdmin = 4
+                        break;
+
+                    default:
+                        break;
                 }
-                } catch (error) {
-                    res.status(500).send({ mesage: error.mesage })
+
+                console.log(novoUsuario)
+                await createUserService(novoUsuario);
+                req.flash('success_msg', 'Usuário cadastrado com sucesso!')
+                res.redirect('/user/allUsers')
+            }
+
+        } else {
+
+            return res.send('Falha ao carregar foto')
+        }
+    } catch (error) {
+        res.status(500).send({ mesage: error.mesage })
     }
 }
 
@@ -244,23 +249,23 @@ export const perfil = async (req, res) => {
         const username = userLog.username;
         const user = await findUserBuNameService(username)
         const id = user._id
-       // return res.send({user})
+        // return res.send({user})
 
-        if(user == ''){
+        if (user == '') {
             return res.send('Usuario não achado!')
 
-        }else{
+        } else {
             //return res.send('Usuario existente')
             if (user.eAdmin == 1) {
                 //return res.send('Usuario Admin')
 
-                res.redirect('/admin/'+id)
-                
+                res.redirect('/admin/' + id)
+
             } else {
                 if (user.categoria == 'professor') {
-                    res.redirect('/professor/'+id)
-                }else{
-                    
+                    res.redirect('/professor/' + id)
+                } else {
+
                     if (user.categoria == 'aluno') {
                         const aluno = await findAlunoByIdUser(id)
                         const idAluno = aluno._id
@@ -279,12 +284,12 @@ export const perfil = async (req, res) => {
                         failureFlash: true
                     })(req, res, next)
                 } */
-                
+
             }
-            
-            
+
+
         }
     } catch (error) {
-        res.status(500).send({mesage: error.mesage})
+        res.status(500).send({ mesage: error.mesage })
     }
 }

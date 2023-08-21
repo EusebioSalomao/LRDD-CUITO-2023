@@ -1,8 +1,11 @@
 
 import usuario from '../models/user.modles.js';
 import Usuario from '../models/user.modles.js'
+import jwt from 'jsonwebtoken'
 
 export const findByUsernameService = (username) => Usuario.findOne({username: username}).lean();
+
+export const generateToken = (id) => jwt.sign({id: id}, process.env.SECRET_JWT, {expiresIn: 86400})
 
 export const createUserService = (novoUsuario) => Usuario(novoUsuario).save();
 

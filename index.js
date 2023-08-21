@@ -5,6 +5,8 @@ import passport from 'passport'
 import fileUpload from "express-fileupload"
 import fs from 'fs'
 import cors from 'cors'
+import dotenv from 'dotenv'
+dotenv.config();
 
 import handlebars from  'express-handlebars'
 import path from 'path'
@@ -95,8 +97,8 @@ const app = express()
 app.use(session({
     secret: 'tfcispb2023',
     resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 30 * 60 * 1000 }//30min
+    saveUninitialized: false
+    //cookie: { maxAge: 30 * 60 * 1000 }//30min
 }))
 app.use(passport.initialize())
 app.use(passport.session())
