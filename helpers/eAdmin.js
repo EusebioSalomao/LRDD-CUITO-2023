@@ -5,11 +5,17 @@ import { findUserByIdService } from '../src/services/user.service.js';
 dotenv.config()
 
 export const eAdmin = (req, res, next) => {
-    if (req.isAuthenticated() && req.user.eAdmin == 1) {
+   if(req.user){
+    if(req.user.eAdmin == 1) {
         return next();
     }
     req.flash('error_msg', 'Acesso não autorizado!')
     res.redirect('/')
+   }else{
+
+       req.flash('error_msg', 'Acesso não autorizado!')
+       res.redirect('/')
+    }
 }
 export const eSecret = (req, res, next) => {
     if (req.isAuthenticated() && req.user.eAdmin == 1 || req.user.eAdmin == 2) {
@@ -36,7 +42,7 @@ export const eFinanc = (req, res, next) => {
 export const veryLogin = async (req, res, next) => {
     try {
         
-        const authorization = 'Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZGM0ZGI2MDRiY2QwODc2YjhlM2Y2YyIsImlhdCI6MTY5MjYzNTYwOCwiZXhwIjoxNjkyNzIyMDA4fQ.nU02RwlUJy7PjsX2xDeZuRKetajWz7QOvaKglp331Dw'
+        const authorization = 'Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZGM0ZGI2MDRiY2QwODc2YjhlM2Y2YyIsImlhdCI6MTY5MjY0NTg1OCwiZXhwIjoxNjkyNzMyMjU4fQ.-v1o5HkhhRXTR75DH57jiKXJZasLjKmgndFX9vSXwNQ'
         if(!authorization){
             return res.status(401).send('Acesso negado!')
         }
