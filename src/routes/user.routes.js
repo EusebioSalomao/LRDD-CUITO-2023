@@ -13,9 +13,9 @@ router.post('/login', login)
 router.get('/logout', veryLogin, logout)
 router.get('/add', veryLogin, eAdmin, wAddUser)
 router.post('/add', veryLogin, eAdmin, upload.single('fotoUser'), validFildUser, addUser)
-router.get('/deletUser/:id', eAdmin, veryLogin, deletUser)
-router.get('/editUser/:id', eAdmin, veryLogin, wEditUser)
-router.post('/editUser', eAdmin, veryLogin, editUser)
+router.get('/deletUser/:id', veryLogin, eAdmin, deletUser)
+router.get('/editUser/:id', veryLogin, eAdmin, wEditUser)
+router.post('/editUser', veryLogin, eAdmin, editUser)
 router.get('/perfil', veryLogin, perfil)
 
 

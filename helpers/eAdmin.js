@@ -65,6 +65,7 @@ export const veryLogin = async (req, res, next) => {
             return res.status(401).send('Usuario não existente!')
             }
             req.userId = user._id;
+            req.user = user
             return next()
         })
     } catch (error) {

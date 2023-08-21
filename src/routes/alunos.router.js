@@ -3,9 +3,9 @@ import { fichaAluno, matricular, tdAlunos, wAdmitir } from '../controlles/aluno.
 import { eAdmin, veryLogin } from '../../helpers/eAdmin.js'
 const router = Router()
 
-router.get('/', eAdmin, veryLogin, tdAlunos)
-router.get('/matricular/:id', eAdmin, veryLogin, wAdmitir)
-router.post('/matricular/:id', eAdmin, veryLogin, matricular)
+router.get('/', veryLogin, eAdmin, tdAlunos)
+router.get('/matricular/:id', veryLogin, eAdmin, wAdmitir)
+router.post('/matricular/:id', veryLogin, eAdmin, matricular)
 router.get('/ficha/:id', veryLogin, fichaAluno)
 
 export default router

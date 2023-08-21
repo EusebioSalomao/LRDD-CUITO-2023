@@ -4,11 +4,11 @@ import { adCurso, allCursos, editCurso, excluirCurso, wAdCurso, wEditCurso } fro
 import { eAdmin, veryLogin } from "../../helpers/eAdmin.js";
 
 router.get('/', veryLogin, allCursos)
-router.get('/add/:id', eAdmin, veryLogin, wAdCurso)
-router.post('/add', eAdmin, veryLogin, adCurso)
-router.get('/editar/:id', eAdmin, veryLogin, wEditCurso)
-router.post('/editar', eAdmin, veryLogin, editCurso)
-router.get('/excluir/:id', eAdmin, veryLogin, excluirCurso)
+router.get('/add/:id', veryLogin, eAdmin, wAdCurso)
+router.post('/add', veryLogin, eAdmin, adCurso)
+router.get('/editar/:id', veryLogin, eAdmin, wEditCurso)
+router.post('/editar', veryLogin, eAdmin, editCurso)
+router.get('/excluir/:id', veryLogin, eAdmin, excluirCurso)
 
 
 export default router

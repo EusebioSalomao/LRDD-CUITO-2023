@@ -3,7 +3,7 @@ import {turma, addTurma, gerirTurmas, tdTurmas, novaMatricula, saveNovaMatricula
 import { eAdmin, veryLogin } from "../../helpers/eAdmin.js";
 const router = Router();
 
-router.post('/add', eAdmin, veryLogin, addTurma)
+router.post('/add', veryLogin, eAdmin, addTurma)
 router.get('/', veryLogin, tdTurmas)
 router.post('/gestao', veryLogin, gerirTurmas)
 router.get('/pTurma/:id', veryLogin, turmaP)

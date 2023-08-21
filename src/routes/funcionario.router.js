@@ -7,10 +7,10 @@ const upload = multer({storage: storage});
 const router = Router()
 
 router.get('/', veryLogin, tdFuncionarios)
-router.get('/add', eAdmin, veryLogin, addFuncionario)
-router.post('/saveFuncionario', eAdmin, veryLogin, upload.single('fotoProf'), saveFuncionario)
+router.get('/add', veryLogin, eAdmin, addFuncionario)
+router.post('/saveFuncionario', veryLogin, eAdmin, upload.single('fotoProf'), saveFuncionario)
 router.get('/detalhes/:id', veryLogin, detalheF)
-router.get('/editar/:id', eAdmin, veryLogin, editarF)
-router.post('/saveEditar', eAdmin, veryLogin, saveEditar)
+router.get('/editar/:id', veryLogin, eAdmin, editarF)
+router.post('/saveEditar', veryLogin, eAdmin, saveEditar)
 
 export default router

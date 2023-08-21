@@ -4,6 +4,6 @@ import { eAdmin, veryLogin } from '../../helpers/eAdmin.js';
 const router = Router()
 
 router.get('/', veryLogin, tdDisciplina)
-router.post('/add', eAdmin, veryLogin, addDisciplina)
+router.post('/add', veryLogin, eAdmin, addDisciplina)
 
 export default router;

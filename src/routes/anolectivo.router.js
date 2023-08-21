@@ -3,17 +3,17 @@ import { abrirCandidatura, activarAnoLectivo, adAnoLectivo, allAnosLectivos, del
 import { eAdmin, veryLogin } from "../../helpers/eAdmin.js";
 const router = Router()
 
-router.get('/', eAdmin, veryLogin, allAnosLectivos)
-router.get('/add', eAdmin, veryLogin, wAdAnoLectivo)
-router.post('/add', eAdmin, veryLogin, adAnoLectivo)
+router.get('/', veryLogin, eAdmin, allAnosLectivos)
+router.get('/add', veryLogin, eAdmin, wAdAnoLectivo)
+router.post('/add', veryLogin, eAdmin, adAnoLectivo)
 router.get('/config/:id', veryLogin, wConfigAnoLectivo)
-router.post('/deletar', eAdmin, veryLogin, deletarAnoLectivo)
-router.get('/activar/:id', eAdmin, veryLogin, activarAnoLectivo)
-router.post('/desativar', eAdmin, veryLogin, desactivarAnoLectivo)
+router.post('/deletar', veryLogin, eAdmin, deletarAnoLectivo)
+router.get('/activar/:id', veryLogin, eAdmin, activarAnoLectivo)
+router.post('/desativar', veryLogin, eAdmin, desactivarAnoLectivo)
 router.post('/gerirCurso', veryLogin, gerirCurso)
-router.get('/edit/:id', eAdmin, veryLogin, editAnoLectivo)
-router.post('/editSave', eAdmin, veryLogin, editSave)
-router.get('/abrirCandidatura/:id', eAdmin, veryLogin, abrirCandidatura)
-router.get('/encerrarCandidatura/:id', eAdmin, veryLogin, ecerrarCandidatura)
+router.get('/edit/:id', veryLogin, eAdmin, editAnoLectivo)
+router.post('/editSave', veryLogin, eAdmin, editSave)
+router.get('/abrirCandidatura/:id', veryLogin, eAdmin, abrirCandidatura)
+router.get('/encerrarCandidatura/:id', veryLogin, eAdmin, ecerrarCandidatura)
 
 export default router

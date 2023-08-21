@@ -1,5 +1,4 @@
 
-import usuario from '../models/user.modles.js';
 import Usuario from '../models/user.modles.js'
 import jwt from 'jsonwebtoken'
 
