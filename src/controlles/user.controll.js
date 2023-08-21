@@ -35,7 +35,7 @@ export const login = async (req, res, next) => {
         } else {
             const id = user._id
             const token = generateToken(user._id)
-            return res.send({token})
+            //return res.send({token})
             Cookies.set("token", token, {expires: 1})
             
             //return res.send('Usuario existente')

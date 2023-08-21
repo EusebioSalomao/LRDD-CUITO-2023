@@ -36,7 +36,7 @@ export const eFinanc = (req, res, next) => {
 export const veryLogin = async (req, res, next) => {
     try {
         
-        const authorization = 'Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDc3Y2RjMGQxYTNmNzc3NTJlMDUwZSIsImlhdCI6MTY5MjYzMzM0OCwiZXhwIjoxNjkyNzE5NzQ4fQ.V8Rc82QWm3k1vhAlICSCbDUz39GbuuVd8PsIYSmCUSs'
+        const authorization = 'Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZGM0ZGI2MDRiY2QwODc2YjhlM2Y2YyIsImlhdCI6MTY5MjYzNTYwOCwiZXhwIjoxNjkyNzIyMDA4fQ.nU02RwlUJy7PjsX2xDeZuRKetajWz7QOvaKglp331Dw'
         if(!authorization){
             return res.status(401).send('Acesso negado!')
         }
