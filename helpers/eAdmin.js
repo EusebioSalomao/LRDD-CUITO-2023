@@ -43,10 +43,10 @@ export const veryLogin = async (req, res, next) => {
         
         //const myToken = req.headers
         
-        const authorization = req.headers
-        console.log({authorization}) 
+        const authorization = null
+        //console.log({authorization}) 
         if(!authorization){
-            return res.status(401).send('Acesso negado!')
+            return res.status(401).send('Acesso negado temporariamente!')
         }
         const parts = authorization.split(" ")
         if(parts.length !== 2){

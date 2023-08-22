@@ -26,6 +26,10 @@ const Usuario = new Schema({
     categoria: {
         type: String,
         default: 'aluno'
+    },
+    token: {
+        type: String,
+        require: true
     }
 })
 
