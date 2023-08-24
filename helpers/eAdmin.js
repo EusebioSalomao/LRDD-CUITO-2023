@@ -2,11 +2,12 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { findUserByIdService } from '../src/services/user.service.js';
+import cookieParser from 'cookie-parser';
 dotenv.config()
 
 export const eAdmin = (req, res, next) => {
     if(req.user.eAdmin === 1) {
-        return res.send(req.user)
+        //return res.send(req.user)
         return next();
     }
     
@@ -40,27 +41,31 @@ export const eFinanc = (req, res, next) => {
 
 export const veryLogin = async (req, res, next) => {
     try {
-        
-        //const myToken = req.headers
-        
-        const authorization = null
+        const myCookes = req.headers.cookie
+        //console.log(req.cookies['access_token']);
+        const myToken = req.cookies['access_token']
+        //return res.send({myToken})
+       
+        const authorization = 'Bear '+myToken
         //console.log({authorization}) 
         if(!authorization){
-            return res.status(401).send('Acesso negado temporariamente!')
+            return res.status(401).send('Acesso negado!')
         }
         const parts = authorization.split(" ")
         if(parts.length !== 2){
-            return res.status(401).send('Acesso negado! <br> O tokem so pode ter duas palabras!: Bear Token')
+            //O tokem so pode ter duas palabras!: Bear Token
+            return res.status(401).send('Acesso negado!')
         }
         const [schema, token] = parts;
         if(schema !== 'Bear'){
-            return res.status(401).send('Acesso negado! <br> A primeira palavra deve ser Bear!: Bear Token')
+            //A primeira palavra deve ser Bear!: Bear Token
+            return res.status(401).send('Acesso negado!')
         }
-
         //Validando o token com jesonwebtoken
         jwt.verify(token, process.env.SECRET_JWT, async (erro, decoded) => {
             if(erro){
-            return res.status(401).send('Acesso negado! <br> Token invalido')
+                //Token invalido
+            return res.status(401).send('Acesso negado!')
             }
             const user = await findUserByIdService(decoded.id);
             if(!user){

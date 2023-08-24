@@ -3,6 +3,7 @@ import session from "express-session"
 import flash from 'connect-flash'
 import passport from 'passport'
 import fileUpload from "express-fileupload"
+import cookieParser from "cookie-parser"
 import fs from 'fs'
 import cors from 'cors'
 import dotenv from 'dotenv'
@@ -113,7 +114,15 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use(cors());
+//Configurar para armazenar cookie
+app.use(cookieParser());
+app.use(cors({
+    origin: 'http://localhost:8081',
+    credentials: true
+}));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+
 
 
 //Confi

@@ -2,7 +2,7 @@ import { createUserService, findAllUsers, findByUsernameService, findUserBIdAndU
 import { authMidleware } from '../middlewares/auth.middleware.js'
 import passport from 'passport'
 import { findAlunoByIdUser } from "../services/aluno.service.js";
-import Cookies from "js-cookie";
+import cookieParser from 'cookie-parser'
 
 export const allUsers = async (req, res) => {
     try {
@@ -34,11 +34,10 @@ export const login = async (req, res, next) => {
 
         } else {
             const id = user._id
-            const token = generateToken(user._id)
-            //return res.send({token})
-            //console.log({token})
-            Cookies.set("token", token, {expires: 1})
-            
+            const token = await generateToken(user._id)
+           // Cookies.set("token", token, {expires: 1})
+           res.cookie("access_token", token, { maxAge: 24 * 60 * 1000, httpOnly: true })
+           //res.json({token: token})
             //return res.send('Usuario existente')
             if (user.eAdmin == 1) {
                 await authMidleware(passport)
@@ -116,6 +115,7 @@ export const login = async (req, res, next) => {
 export const logout = (req, res, next) => {
     req.logout(function (err) {
         if (err) { return next(err) }
+        res.clearCookie('access_token');
         req.flash('success_msg', 'Sua sessão foi encerrada!')
         res.redirect('/')
 
@@ -250,7 +250,7 @@ export const perfil = async (req, res) => {
         const username = userLog.username;
         const user = await findUserBuNameService(username)
         const id = user._id
-        // return res.send({user})
+        //return res.send({user})
 
         if (user == '') {
             return res.send('Usuario não achado!')
@@ -275,6 +275,9 @@ export const perfil = async (req, res) => {
                     }
                     if (user.categoria == 'pedagogico') {
                         res.redirect('/pedagogico/')
+                    }
+                    if (user.categoria == 'secretario') {
+                        res.redirect('/secretaria/')
                     }
                 }
                 /*  else {
