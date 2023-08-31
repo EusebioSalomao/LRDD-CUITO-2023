@@ -579,9 +579,9 @@ export const gerarListaAlunos = async (req, res) => {
         if (err) {
             return res.send('HOUVE UM ERRO!' + err)
         } else {
-            pdf.create(html, {}).toFile("C:/relatorios/listaAlunos_"+turmaCod+"-"+classe.designacao+".pdf", (err, re) => {
+            pdf.create(html, {}).toFile("C:\relatorios\listaAlunos_"+turmaCod+"-"+classe.designacao+".pdf", (err, re) => {
                 if (err) {
-                    return res.send('Um erro aconteceu')
+                    return res.send('Um erro aconteceu ao guradar lista')
                 } else {
                     
                      req.flash('success_msg','Arquivo gerado com sucesso! veja na pasta de relatórios em C:/')
