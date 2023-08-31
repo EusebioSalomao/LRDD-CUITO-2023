@@ -10,7 +10,7 @@ const upload = multer({storage: storage});
 router.get('/allUsers',veryLogin, eAdmin, allUsers)
 router.get('/login', telaLogin)
 router.post('/login', login)
-router.get('/logout', veryLogin, logout)
+router.get('/logout', logout)
 router.get('/add', veryLogin, eAdmin, wAddUser)
 router.post('/add', veryLogin, eAdmin, upload.single('fotoUser'), validFildUser, addUser)
 router.get('/deletUser/:id', veryLogin, eAdmin, deletUser)

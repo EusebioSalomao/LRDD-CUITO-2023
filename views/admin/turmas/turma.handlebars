@@ -7,11 +7,11 @@
 {{else}}
 {{/if}}
 <div class="row">
-    <div class="col-11">
+    <div class="col-10">
 
-<h1><span class="text-secondary">Turma:</span> {{turma.codigo}} - {{classe.designacao}} / {{curso.descricao}}</h1>
+<h2><span class="text-secondary">Turma:</span> {{turma.codigo}} - {{classe.designacao}} / {{curso.descricao}}</h2>
     </div>
-    <div class="col-1 pt-3"><a href="#" class="btn btn-sm btn-primary " onclick="addAluno()">+Aluno</a></div>
+    <div class="col-2 pt-3"><a href="#" class="btn btn-sm btn-primary " onclick="addAluno()">+Aluno</a> <a href="/pedagogico/turmas" class="btn btn-sm mybtn-primary" >Td Turmas</a></div>
 </div>
 <hr>
 <div class="bg-secondary p-2">
@@ -78,6 +78,7 @@
 <hr>
 <div class="text-center">
     <button type="submit" class="btn btn-sm btn-danger" onclick="eliminarTurma()" >Eliminar esta turma</button>
+    <a href="/turmas/gerarLista/{{turma._id}}"> <button class="btn btn-sm btn-secondary" >Gerar lista</button> </a>
 </div>
 
 

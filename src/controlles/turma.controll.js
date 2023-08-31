@@ -1,5 +1,5 @@
 import { createAlunoService, findAlunoByBIService, findAlunosByIdTurma } from "../services/aluno.service.js";
-import { findAnoLectivoById } from "../services/anoLectivo.service.js";
+import { findAnoLectivoById, findAnoLectivoByEstadoService } from "../services/anoLectivo.service.js";
 import { findAllCandidatosByCursoService, findCandByIdAndUpdateService, findCandByIdService, findCandByNumBIService } from "../services/candidato.service.js";
 import { addTurmaClasseService, findAllClassesByIdCurso, findClasseByIdAndUpdate, findClasseByIdService } from "../services/classe.service.js";
 import { findCursoByIdService } from "../services/curso.service.js";
@@ -169,6 +169,29 @@ export const turma = async (req, res) => {
         res.status(500).send({ mesage: error.mesage })
     }
 }
+
+export const gerarLista = async (req, res) => {
+    try {
+        const idTurma = req.params.id
+        const estado = 'Activo'
+        const ano = await findAnoLectivoByEstadoService(estado)
+        const alunos = await findAlunosByIdTurma(idTurma)
+        const turma = await findTurmaByIdService(idTurma)
+        const idCurso = turma.idCurso
+        const curso = await findCursoByIdService(idCurso)
+        const classe = await findClasseByIdService(turma.idClasse)
+        let num = 1
+        alunos.forEach(aluno => {
+            aluno.numero = num++ 
+        });
+        //return res.send({classe})
+
+        res.render('admin/turmas/gerarLista', {turma, curso, alunos, ano, classe})
+    } catch (error) {
+        res.status(500).send({mesage: error.mesage})
+    }
+}
+
 export const turmaP = async (req, res) => {
     try {
         const idTurma = req.params.id

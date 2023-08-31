@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF-Teste</title>
+    <style>
+        body{
+            margin: 2rem;
+        }
+        .logo{
+            size: 6px !important;
+            margin-bottom: 0rem;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .m-1{
+            margin: 1rem;
+            padding: 0rem;
+        }
+        .fw-bold{
+            font-weight: bold;
+        }
+        .mt-3{
+            margin-top: 2rem;
+        }
+        .row{
+            display: inline-block
+        }
+        .table-bordered {
+    border-collapse: collapse; /* CSS2 */
+}
+ 
+.table-bordered td {
+    border: 1px solid black;
+}
+ 
+.table-bordered th {
+    border: 1px solid black;
+    background: #878383;
+    font-weight: bold;
+}
+
+ol {
+    list-style: start;
+}
+.lateral{
+    position: absolute;
+    right: 5rem;
+    top: 20.6rem;
+}
+.table-secondary {
+    background-color: #cdcccc;
+}
+.m-r{
+    margin-right: 14rem;
+}
+.m-r2{
+    margin-right: 16rem;
+}
+.mt-5{
+    margin-right: 20rem;
+
+}
+.visto{
+    position: absolute;
+    top: 5rem;
+}
+p{
+    margin: 0.3px;
+    padding: 0px;
+}
+.text-size-10 {
+    font-size: 15pt;
+}
+.text-size-12 {
+    font-size: 20pt;
+}
+.text-danger {
+    color: red;
+}
+.text-start {
+    text-align: start;
+}
+.text-sub {
+    text-decoration: underline;
+}
+table {
+    margin-left: 6rem;
+}
+.lg-2 {
+    width: 5rem;
+}
+.lg-4 {
+    width: 10rem;
+}
+.lg-6 {
+    width: 15rem;
+}
+.lg-8 {
+    width: 30rem;
+}
+
+    </style>
+</head>
+<body>
+    <div class="containeir text-size-12">
+
+        <div class="logo text-center"><img src="http://localhost:8081/img/logor.png" class="logor" alt="Logo"></div>
+        <div class="text-center">
+            <p>República de Angola</p>
+            <p>Governo da Província do Bié</p>
+            <p>Administração Municipal de Catabola</p>
+            <p class="fw-bold" >LICEU REI NDUDUMA DO CUITO</p>
+            
+            <div class="mt-3 lead fw-bold text-danger h4 text-sub"> <%= curso.descricao %> </div>
+            <div class="mt-3"> <span>Ano Lectivo:</span> <span class="fw-bold" > <%= anoCod %> </span> &shy; &shy; &shy; &shy; <span> <%= classe.designacao %> </span> <%= turmaCod %> </div>
+            <div class="h4 mt-2 ">LISTA DOS ALUNOS</div>
+
+            <!-- VITO -->
+            <div class="visto">
+                <div class="text-center">
+                    <div class="fw-bold">A Directora</div>
+                    <span>___________________</span><br>
+                    <span>Lic. Emília Carla Adelino Cawaia
+                    </span><br>
+                    <span class="text-size-10" >___/____/<%= anoCod %>
+                    </span>
+                </div>
+            </div>
+
+            <div class="px-5">
+
+                <table class="table table-bordered">
+                    <thead class="fw-bold bg-light table-secondary">
+                        <tr><td>Nº</td> <td>NOME COMPLETO</td> <td>SEXO</td> <td>OBSERVAÇÃO</td> </tr>
+                    </thead>
+                    <tbody>
+                        <% for(let i = 0; i < alunos.length; i++) { %>
+                            <tr>
+                                <td class="lg-2" > <%= i+1 %> </td>
+                                <td class="text-start lg-8" > <%= alunos[i].nome %></td>
+                                <td class="lg-4" ></td>
+                                <td class="lg-6" ></td>
+                                
+                            </tr>
+                            
+                            <% } %>
+                        </tbody>
+                </table>
+                </div>
+            
+        </div>
+        <div class="">
+
+            <div class="data mt-3 text-center">
+                Liceu Rei Nduduma no Cuito aos <%= dia %> de <%= mes %> de <%= ano %>.
+            </div>
+
+            <div class="fw-bold mt-3 text-center">
+    
+                <span >O Subdirector Pedagógico</span> <br>
+            </div>
+            <div class="text-center">
+    
+                <span>_________________________</span><br>
+                 <span>MSc. Frederico Sanji Figueiredo</span><br>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

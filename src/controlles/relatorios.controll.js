@@ -2,11 +2,13 @@ import fs from 'fs'
 import pdf from 'html-pdf'
 import ejs from 'ejs'
 import { findPautaByIdTurma } from '../services/pauta.service.js'
-import { findDadosTurmaByIdService } from '../services/turma.service.js'
-import { findAnoLectivoById } from '../services/anoLectivo.service.js'
+import { findDadosTurmaByIdService, findTurmaByIdService } from '../services/turma.service.js'
+import { findAnoLectivoByEstadoService, findAnoLectivoById } from '../services/anoLectivo.service.js'
 import { findAllDespesasService, findAllReceitasService } from '../services/financas.service.js'
-import { findAlunoByBIService, findAlunoByIdService } from '../services/aluno.service.js'
+import { findAlunoByBIService, findAlunoByIdService, findAlunosByIdTurma } from '../services/aluno.service.js'
 import { findOcorrenciaByIdAndUpdateServece, findSolicitacaoByIdService } from '../services/ocorrencias.service.js'
+import { findCursoByIdService } from '../services/curso.service.js'
+import { findClasseByIdService } from '../services/classe.service.js'
 
 
 export const pautaTrimestral = async (req, res) => {
@@ -544,6 +546,46 @@ export const declaracaoSemNota = async (req, res) => {
                     
                      req.flash('success_msg','Arquivo gerado com sucesso! veja na pasta de relatórios')
                     res.redirect('/pedagogico/pedidos') 
+                }
+            })
+        }
+    })
+    } catch (error) {
+        res.status(500).send({mesage: error.mesage})
+    }
+}
+export const gerarListaAlunos = async (req, res) => {
+    try {
+        const date = new Date();
+        let dia = date.getDate();
+        let mes = date.toLocaleString('default', { month: 'long' });
+        let ano = date.getFullYear();
+        
+        const idTurma = req.params.id
+        const estado = 'Activo'
+        const anoLectivo = await findAnoLectivoByEstadoService(estado)
+        const anoCod = anoLectivo.codigo
+        const alunos = await findAlunosByIdTurma(idTurma)
+        const turma = await findTurmaByIdService(idTurma)
+        const turmaCod = turma.codigo
+        const idCurso = turma.idCurso
+        const curso = await findCursoByIdService(idCurso)
+        const classe = await findClasseByIdService(turma.idClasse)
+        //return res.send({classe})
+
+        
+       //PARA GERAR RELATÓRIO
+       ejs.renderFile("./views/relatorios/listaAlunos.ejs", { dia:dia, mes:mes, ano:ano, alunos: alunos, curso: curso, anoCod: anoCod, classe: classe, turmaCod: turmaCod }, (err, html) => {
+        if (err) {
+            return res.send('HOUVE UM ERRO!' + err)
+        } else {
+            pdf.create(html, {}).toFile("./relatorios/listaAlunos_"+turmaCod+"-"+classe.designacao+".pdf", (err, re) => {
+                if (err) {
+                    return res.send('Um erro aconteceu')
+                } else {
+                    
+                     req.flash('success_msg','Arquivo gerado com sucesso! veja na pasta de relatórios')
+                    res.redirect('/turmas/gerarLista/'+idTurma) 
                 }
             })
         }
