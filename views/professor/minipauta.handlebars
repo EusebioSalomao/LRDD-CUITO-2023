@@ -103,10 +103,12 @@
                 </tr>    
             </thead>
             {{#each notasDisciplina}}
+            
             <ol class="m-0 p-0" >
 
             <tr>
-                <td><span class="mx-0"><li></li></span></td>
+                <td class="text-center" ><span class="mx-0"> {{numeroOrd}} </span></td>
+                
                 <td><span class="text-sm"> {{aluno.nome}} </span> </td>
                 <td class="text-center" > {{notas.av1T1}} </td>
                 <td class="text-center" > {{notas.av2T1}} </td>
@@ -143,7 +145,49 @@
                 </tr>
             </ol>
                 {{else}}
+                {{!-- NENHUMA NOTA LANÇADA --}}
                 <div class="h5 text-center p-2">Nenhuma nota foi lançada!</div>
+            {{#each alunosTurma}}
+
+            <ol class="m-0 p-0" >
+
+            <tr>
+                <td><span class="mx-0"> {{numeroOrd}} </span></td>
+                
+                <td><span class="text-sm"> {{nome}} </span> </td>
+                <td class="mark fw-bold text-success text-center" > {{notas.mac1}} </td>
+                <td> {{notas.pp1}} </td>
+                 <td> {{notas.pt1}} </td>
+                <td class="bg-light fw-bold text-center text-primary" > {{notas.mt1}} </td>
+
+        {{!-- 2º Trimwstre --}}
+                <td class="text-center" > {{notas.av1T2}} </td>
+                <td class="text-center" > {{notas.av2T2}} </td>
+                <td class="text-center" > {{notas.av3T2}} </td>
+                <td class="text-center fw-bold text-success" > {{notas.mac2}} </td>
+                <td > {{notas.pp2}} </td>
+                <td > {{notas.pt2}} </td>
+                <td class="bg-info text-light text-center fw-bold" > {{notas.mt2}} </td>
+
+        {{!-- 3º Trimwstre --}}
+                <td class="text-center" > {{notas.av1T3}} </td>
+                <td class="text-center" > {{notas.av2T3}} </td>
+                <td class="text-center" > {{notas.av3T3}} </td>
+                <td class="text-center fw-bold text-success"> {{notas.mac3}} </td>
+                <td> {{notas.pp3}} </td>
+                <td> {{notas.pt3}} </td>
+                <td class="bg-secondary text-light text-center fw-bold" > {{notas.mt3}} </td>
+
+
+                <td class="text-center text-primary fw-bold" > {{notas.medDosTrimestes}} </td>
+               <td> {{notas.examePF}} </td>
+                <td class="text-center fw-bold" > {{notas.cf}} </td>
+
+
+                </tr>
+            </ol>
+            {{else}}
+            {{/each}}
                 {{/each}}
         </tbody>
     </table>

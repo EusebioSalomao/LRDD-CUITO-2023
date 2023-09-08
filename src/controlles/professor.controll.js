@@ -154,14 +154,53 @@ export const miniPauta = async (req, res) => {
         const tdTurmas = await findAllTurmasService()
         const idTurma = minipauta.idTurma._id
         const alunosTurma = await findAlunosByIdTurma(idTurma)
-        const notasDisciplina = await findNotasDisciplinaByIdMinipautaService(id)
+        //const notasDisciplina = await findNotasDisciplinaByIdMinipautaService(id)
         const usuario = minipauta.idProfessor.usuario
+
+        /* PARA ADICIONAR ALUNO NA MINIPAUTA */
+        const VeryNotasDisciplina = await findNotasDisciplinaByIdMinipautaService(id)
+        alunosTurma.forEach( async aluno => {
+            let achado = ''
+            VeryNotasDisciplina.forEach( notaD  => {
+                if(notaD.aluno._id == ''+aluno._id){
+                    achado = 'Achado!'
+                }
+            });
+            if(achado){
+                console.log(achado)
+            }else{
+                console.log('Não achado...')
+                //console.log('Não Achado')
+                    let novaNotasDoaluno = {
+                        aluno: aluno._id,
+                        professor: minipauta.idProfessor,
+                        idMinipauta: minipauta._id,
+                        idClasse: minipauta.idClasse,
+                        idTurma: minipauta.idTurma
+                    }
+                    let notaTrimestral = {}
+                    const notasTrimCread = await createNotaTrimestral(notaTrimestral)
+                    novaNotasDoaluno.notas = notasTrimCread._id
+                    const notasDoAlunoCriada = await createNotasDisciplinaService(novaNotasDoaluno)
+                    console.log({notasDoAlunoCriada})
+                    /* 
+                */
+            }
+        });
+        const notasDisciplina = await findNotasDisciplinaByIdMinipautaService(id)
+        //return res.send(notasDisciplina)
+        
+        /* Numerar */
+        let numeroOrd = 1
+        notasDisciplina.forEach(aluno => {
+            aluno.numeroOrd = numeroOrd++
+        });
+        
 
         if (user) {
 
             if (user._id == usuario) {
                 lancarNota = 'Autorisado'
-                //return res.send('Autorizado')
             }
         }
 
