@@ -1,7 +1,7 @@
 import { createAlunoService } from "../services/aluno.service.js"
 import { findAnoLectivoByEstadoService } from "../services/anoLectivo.service.js"
 import { findTurmaByCodigoServece, findTurmaByIdAndDeleteSerice, findTurmaByIdAndUpdService, findTurmaByIdCursoService, findTurmaByIdService } from "../services/turma.service.js"
-import { findUserByIdService } from "../services/user.service.js"
+import { createUserService, findByUsernameService, findUserByIdService } from "../services/user.service.js"
 
 export const admin = async (req, res) => {
     try {
@@ -30,8 +30,24 @@ export const addAluno = async (req, res) => {
         const idClasse = req.body.idClasse
         const idCurso = req.body.idCurso
 
+        const turma = await findTurmaByIdService(idTurma)
         const anoActivo = await findAnoLectivoByEstadoService('Activo')
         const idAno = anoActivo._id
+        
+        //console.log(num)
+        const nomeArray = nome.split(" ")
+        const username0 = nomeArray[0]+'@ndunduma'+turma.codigo+'.'+nomeArray[1]
+        const username = username0.toLocaleLowerCase()
+        const senha = turma.codigo+'-'+nomeArray[1]
+        
+        //return res.send({senha})
+        const novoUsuario = {
+            username: username,
+            senha: senha,
+            categoria: 'aluno',
+            telefone: ''
+        }
+
 
         const aluno = {
             nome : nome,
@@ -50,11 +66,21 @@ export const addAluno = async (req, res) => {
             nomeEncarregado: 'Não definido',
             matricula: 'Confirmada',
         }
-        await createAlunoService(aluno)
-        //return res.send('Sucesso!')
+        const veryUser = await findByUsernameService(username)
+        if(veryUser){
+            //return res.send('Não foi possível adicionar aluno. Já ha um usuário com este nome!')
+            req.flash('error_msg', 'Não foi possível adicionar aluno. Nome de usuário já existente! (Ao criar conta do aluno)')
+            res.redirect('/turmas/turma/'+idTurma)
+        }else{
 
-        req.flash('success_msg', 'Aluno adicionado com sucesso!')
-        res.redirect('/turmas/turma/'+idTurma)
+            const userAluno = await createUserService(novoUsuario)
+            aluno.usuario = userAluno._id;
+            await createAlunoService(aluno)
+            //return res.send('Sucesso!')
+            
+            req.flash('success_msg', 'Aluno adicionado com sucesso!')
+            res.redirect('/turmas/turma/'+idTurma)
+        }
     } catch (error) {
         res.status(500).send({ mesage: error.mesage })
     }

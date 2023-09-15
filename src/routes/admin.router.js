@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/:id', veryLogin, eAdmin, admin)
 router.post('/editFoto', veryLogin, editarFoto)
-router.post('/addAluno', eAdmin, addAluno)
+router.post('/addAluno',veryLogin, eAdmin, addAluno)
 router.post('/eliminarTurma/', eAdmin, eliminarTurma)
 router.post('/editarTurma/',veryLogin, eAdmin, editarTurma)
 
