@@ -6,7 +6,7 @@ import { eAdmin, veryLogin } from "../../helpers/eAdmin.js";
 const upload = multer({storage: storage});
 const router = Router()
 
-router.get('/', veryLogin, tdFuncionarios)
+router.get('/', veryLogin, eAdmin, tdFuncionarios)
 router.get('/add', veryLogin, eAdmin, addFuncionario)
 router.post('/addd', veryLogin, eAdmin, addFuncionarioPriori)
 router.post('/saveFuncionario', veryLogin, eAdmin, upload.single('fotoProf'), saveFuncionario)
