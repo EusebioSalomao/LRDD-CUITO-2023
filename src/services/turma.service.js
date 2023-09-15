@@ -16,3 +16,7 @@ export const findTurmasByIdAno = (idAno) => Turma.find({idAno: idAno}).lean().po
 
 export const findTurmaByIdAndDeleteSerice = (idTurma) => Turma.findByIdAndDelete(idTurma)
 
+export const findTurmaByCodigoServece = (codigo) => Turma.findOne({codigo: codigo}).lean()
+
+export const findTurmaByIdAndUpdService = (idTurma, turmaAActualizar) => Turma.findByIdAndUpdate(idTurma, turmaAActualizar).lean()
+

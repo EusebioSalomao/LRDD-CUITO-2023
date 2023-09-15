@@ -59,8 +59,8 @@
 .mycardTurmas li{
     display: inline-block;
     background-color: rgb(53, 58, 30);
-    width: 200px;
-    height: 100px;
+    width: 100px;
+    height: 180px;
     border: 5px solid #ffffff;
     margin: 5px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0,.3);
@@ -188,4 +188,7 @@
 }
 .mytext-secondary {
     color: rgba(0, 0, 0, .6);
+}
+.text-sm {
+    font-size: small;
 }

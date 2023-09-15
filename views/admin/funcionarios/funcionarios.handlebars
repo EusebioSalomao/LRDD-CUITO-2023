@@ -1,6 +1,15 @@
 <h2>  Lista de todos funcionarios</h2>
 <hr>
+<div class="row">
+    <div class="col-10">
 <a href="/rh" class="bg-secondary text-light btn"> Voltar </a>  <a href="/funcionarios/add"><button class="btn btn-primary" >Cadastrar novo funcionario</button></a>
+
+    </div>
+    <div class="col-2 text-end">
+  <a href="#"><button class="btn btn-primary" onclick="adFuncPrio()">+Prioritário</button></a>
+
+    </div>
+</div>
 <div class="continer">
     {{#each funcionarios}}
     <div class="card mt-2">
@@ -24,3 +33,52 @@
     <div class="h4 text-center">Não ha funcionário cadastrado</div>
     {{/each}}
 </div>
+
+
+{{!-- M O D A I S --}}
+
+ <!-- Modal adFuncPrioritario-->
+
+                <div class="modal" tabindex="-1" data-bs-backdrop="static" id="adFuncPrio">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <form action="/funcionarios/addd" method="post">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Adicionar funcionario com prioridade</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body input-box">
+                                    <label for="nome">Nome completo</label>
+                                    <input type="text" name="nome" required>
+                                    <label for="numAgente">Número de Agente:</label>
+                                    <input type="text" name="numAgente" required>
+
+
+                                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                                </div>
+                                <div class="modal-footer text-center">
+                                    {{!-- <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Feichar</button>
+                                    --}}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </form>
+
+            <script src="assets/bootstrap.bundle.min.js" class="img-fluid"></script>
+            <script>
+                function adFuncPrio() {
+
+                    let el = document.getElementById('adFuncPrio');
+                    let minha_modal = new bootstrap.Modal(el);
+                    minha_modal.show();
+                }
+
+                
+
+
+
+            </script>

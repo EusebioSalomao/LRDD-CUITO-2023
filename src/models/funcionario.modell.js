@@ -8,7 +8,11 @@ const Funcionario = new Schema({
     },
     numBI: {
         type: String,
-        required: true
+        require: true
+    },
+    numAgente: {
+        type: String,
+        require: true
     },
     contacto: {
         type: String,
@@ -16,11 +20,11 @@ const Funcionario = new Schema({
     },
     genero: {
         type: String,
-        required: true
+        require: true
     },
     dataNascimento: {
         type: Date,
-        required: true
+        require: true
     },
     idade: {
         type: Number,
@@ -36,12 +40,12 @@ const Funcionario = new Schema({
     },
     morada: {
         type: String,
-        required: true
+        require: true
     },
     funcao: {
         type: String,
         default: 'professor',
-        required: true
+        require: true
     },
       usuario: {
          type: String,

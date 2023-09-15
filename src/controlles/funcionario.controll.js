@@ -61,6 +61,39 @@ export const saveFuncionario = async (req, res) => {
         res.status(500).send({mesage: error.mesage})
     }
 }
+export const addFuncionarioPriori = async (req, res) => {
+    try {
+       
+            const funcionario = req.body
+
+
+            const nome = req.body.nome
+            const numAgente = req.body.numAgente
+            const num = numAgente.slice(2, 5)
+            //console.log(num)
+            const nomeArray = nome.split(" ")
+            const username0 = nomeArray[0]+'@ndunduma'+num+'.'+nomeArray[1]
+            const username = username0.toLocaleLowerCase()
+            
+            const novoUsuario = {
+                username: username,
+                senha: req.body.numAgente,
+                telefone: '',
+                categoria: 'professor'
+            }
+            const userFuncionario = await createUserService(novoUsuario)
+            funcionario.usuario = userFuncionario._id
+            
+            const novoF = await createFuncionarioService(funcionario)
+            //return res.send({novoF})
+            req.flash('success_msg', 'Funcionario cadastrado com sucesso!')
+            res.redirect('/funcionarios')
+        
+    
+    } catch (error) {
+        res.status(500).send({mesage: error.mesage})
+    }
+}
 
 export const detalheF = async (req, res) => {
     try {

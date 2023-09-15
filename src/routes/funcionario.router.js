@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addFuncionario, detalheF, editarF, saveEditar, saveFuncionario, tdFuncionarios } from "../controlles/funcionario.controll.js";
+import { addFuncionario, addFuncionarioPriori, detalheF, editarF, saveEditar, saveFuncionario, tdFuncionarios } from "../controlles/funcionario.controll.js";
 import {storage} from '../middlewares/uploadImage.midware.js'
 import multer from 'multer'
 import { eAdmin, veryLogin } from "../../helpers/eAdmin.js";
@@ -8,6 +8,7 @@ const router = Router()
 
 router.get('/', veryLogin, tdFuncionarios)
 router.get('/add', veryLogin, eAdmin, addFuncionario)
+router.post('/addd', veryLogin, eAdmin, addFuncionarioPriori)
 router.post('/saveFuncionario', veryLogin, eAdmin, upload.single('fotoProf'), saveFuncionario)
 router.get('/detalhes/:id', veryLogin, detalheF)
 router.get('/editar/:id', veryLogin, eAdmin, editarF)

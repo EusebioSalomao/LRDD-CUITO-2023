@@ -77,8 +77,9 @@
 </div>
 <hr>
 <div class="text-center">
-    <button type="submit" class="btn btn-sm btn-danger" onclick="eliminarTurma()" >Eliminar esta turma</button>
+    <button type="submit" class="btn btn-sm mybtn-primary" onclick="editarTurma()" >Editar dados da turma</button>
     <a href="/turmas/gerarLista/{{turma._id}}"> <button class="btn btn-sm btn-secondary" >Gerar lista</button> </a>
+    <button type="submit" class="btn btn-sm mybtn-danger" onclick="eliminarTurma()" >Eliminar esta turma</button>
 </div>
 
 
@@ -236,6 +237,43 @@
         </div>
     </div>
 </div>
+<!-- Modal editarTurma-->
+<div class="modal" tabindex="-1" data-bs-backdrop="static" id="editarTurma">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h3 class="modal-title"> Alterar código da turma  </h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="container">
+                <form action="/admin/editarTurma/" method="post">
+                    <div class="card">
+                            <label for="codigo" class="mt-2 text-center">Código</label>
+                            <div class="col-6 offset-3">
+                            <input type="text" name="codigo" value="{{turma.codigo}}" class="form-control text-center" id="">
+                            </div>
+                        <div class="card-body">
+                            <div class="text-center">{{classe.designacao}}</div>
+                            <div class="text-center">Curso: {{curso.descricao}}</div>
+                            </div>
+                        </div>
+                    </div>
+            <div class="text-center p-3">
+                            <input type="hidden" name="idTurma" value="{{turma._id}}" id="">
+                            <input type="hidden" name="numBI" value="000Provisorio" id="">
+                            <input type="hidden" name="classe" value="{{classe.designacao}}" id="" class="form-control my-2">
+                            <input type="hidden" name="idClasse" value="{{classe._id}}" id="" class="form-control my-2">
+                            <input type="hidden" name="curso" value="{{curso.descricao}}" id="" class="form-control my-2">
+                            <input type="hidden" name="idCurso" value="{{curso._id}}" id="" class="form-control my-2">
+                <button type="submit" class="btn btn-primary" >Alterar</button>
+            </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script src="assets/bootstrap.bundle.min.js" class="img-fluid"></script>
 <script>
@@ -261,6 +299,12 @@
     function eliminarTurma() {
 
         let el = document.getElementById('eliminarTurma');
+        let minha_modal = new bootstrap.Modal(el);
+        minha_modal.show();
+    }
+    function editarTurma() {
+
+        let el = document.getElementById('editarTurma');
         let minha_modal = new bootstrap.Modal(el);
         minha_modal.show();
     }
