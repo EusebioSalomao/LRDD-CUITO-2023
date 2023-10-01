@@ -5,7 +5,7 @@ import { addTurmaClasseService, findAllClassesByIdCurso, findClasseByIdAndUpdate
 import { findCursoByIdService } from "../services/curso.service.js";
 import { findAllDiscplinasService, findDisciplinaByIdAndUpdateService, findDisciplinaByIdClasse, findDisciplinaByIdService } from "../services/disciplina.service.js";
 import { findAllFuncionariosService, findFuncionarioByIdAndUpdateService, findFuncionariosByIdService } from "../services/funcionario.service.js";
-import { creatMinipautaService } from "../services/minipauta.service.js";
+import { creatMinipautaService, findMinipautasByIdTurma } from "../services/minipauta.service.js";
 import { createPautaService } from "../services/pauta.service.js";
 import { createTurmaService, findAllTurmasService, findTurmaByIdCursoService, findTurmaByIdService, findTurmasByIdClassedService } from "../services/turma.service.js";
 import { createUserService } from "../services/user.service.js";
@@ -209,10 +209,9 @@ export const turmaP = async (req, res) => {
                 disciplinas.push(element)
             }
         });
-        //return res.send({disciplinas})
-        const funcionarios = await findAllFuncionariosService()
-        const professores = []
-        const professoresDaT = []
+        let funcionarios = await findAllFuncionariosService()
+        let professores = []
+        let professoresDaT = []
         funcionarios.forEach(element => {
             if (element.funcao == 'professor' || element.funcao == 'professora') {
                 element.idTurma = idTurma
@@ -220,12 +219,22 @@ export const turmaP = async (req, res) => {
             }
         });
         funcionarios.forEach(prof => {
-            prof.turmas.forEach(element => {
-                if (element == idTurma) {
-                    professoresDaT.push(prof)
+            prof.turmas.forEach(async t => {
+                if (t == idTurma) {
+                    
+                    const minip = await findMinipautasByIdTurma(idTurma)
+                    minip.forEach(mini => {
+                        
+                        if(mini.idProfessor == ""+prof._id && mini.idTurma == t)
+                        prof.discActual = mini.nomeDisciplina
+                        console.log({prof})
+                    });
                 }
+                professoresDaT.push(prof)
+
             });
         });
+        //return res.send({professoresDaT})
         let naoVagas = ''
         if (classe.numVagas < 1) {
             naoVagas = 'Não existe mais vagas nesta classe!'

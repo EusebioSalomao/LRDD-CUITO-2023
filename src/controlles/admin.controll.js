@@ -1,7 +1,9 @@
-import { createAlunoService } from "../services/aluno.service.js"
+import aluno from "../models/aluno.modell.js"
+import { createAlunoService, findAlunoAnDeleteSercice, findAlunoByBIService, findAlunoByIdService } from "../services/aluno.service.js"
 import { findAnoLectivoByEstadoService } from "../services/anoLectivo.service.js"
+import { findNotasDisciplinaByIdAluno, findNotasDisciplinaByIdAlunoAndDelete } from "../services/notasDisciplina.service.js"
 import { findTurmaByCodigoServece, findTurmaByIdAndDeleteSerice, findTurmaByIdAndUpdService, findTurmaByIdCursoService, findTurmaByIdService } from "../services/turma.service.js"
-import { createUserService, findByUsernameService, findUserByIdService } from "../services/user.service.js"
+import { createUserService, findByUsernameService, findUserByIdAndDelet, findUserByIdService } from "../services/user.service.js"
 
 export const admin = async (req, res) => {
     try {
@@ -84,6 +86,36 @@ export const addAluno = async (req, res) => {
     } catch (error) {
         res.status(500).send({ mesage: error.mesage })
     }
+}
+
+export const apagarAluno = async (req, res) => {
+
+    try {
+        const idAluno = req.params.id
+        const aluno = await findAlunoByIdService(idAluno)
+        //return res.send({aluno})
+         res.render('admin/apagarAluno', {aluno})
+    } catch (error) {
+        res.status(500).send({ mesage: error.mesage })
+    } 
+}
+export const apagarAluno2 = async (req, res) => {
+
+    try {
+        const idAluno = req.body.idAluno
+        const aluno = await findAlunoByIdService(idAluno)
+        const usuario = await findUserByIdService(aluno.usuario)
+        const idTurma = aluno.idTurma
+        //const notasDisciplina = await findNotasDisciplinaByIdAluno(idAluno)
+        await findNotasDisciplinaByIdAlunoAndDelete(idAluno)
+        //return res.send({notasDisciplina})
+        await findUserByIdAndDelet(aluno.usuario)
+        await findAlunoAnDeleteSercice(idAluno)
+        req.flash('error_msg', 'Dados do aluno apagado com sucesso')
+         res.redirect('/turmas/turma/'+idTurma)
+    } catch (error) {
+        res.status(500).send({ mesage: error.mesage })
+    } 
 }
 
 export const eliminarTurma = async (req, res) => {

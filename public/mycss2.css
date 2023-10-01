@@ -151,11 +151,11 @@
 }
 
 .bg-verdAlf {
-    background-color: rgb(45, 234, 12);
+    background-color: rgba(30, 159, 7, 0.581);
 }
 
 .bg-laranja {
-    background-color: orange;
+    background-color: rgb(170, 116, 16);
 }
 .bg-laranja:hover {
     background-color: rgb(198, 130, 4);
@@ -191,4 +191,21 @@
 }
 .text-sm {
     font-size: small;
+}
+.mycolor-1 {
+    background-color: rgba(91, 154, 134, 0.681);
+}
+.apagarAluno {
+    height: 40rem;
+}
+
+.mybtn2-danger {
+    background-color: rgb(252, 112, 112);
+    color: white;
+    transition: background 1s;
+    
+}
+.mybtn2-danger:hover{
+    background-color: rgb(111, 31, 31) !important;
+    color: white;
 }

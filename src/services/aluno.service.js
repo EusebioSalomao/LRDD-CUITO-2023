@@ -16,3 +16,5 @@ export const findAlunosByIdAnoService = (idAno) => Aluno.find({idAno: idAno}).le
 
 export const findAlunoByNumBIService = (numBI) => Aluno.findOne({numBI: numBI}).lean()
 
+export const findAlunoAnDeleteSercice = (idAluno) => Aluno.findByIdAndDelete(idAluno)
+

@@ -60,11 +60,21 @@
 
                     <div class="row">
                         <div class="col-2">FOTO</div>
-                        <div class="col-5 h4">{{nome}}</div>
+                        <div class="col-4 h4">{{nome}}</div>
                         <div class="col-2">{{idade}} anos</div>
                         <div class="col-2">{{genero}}</div>
-                        <div class="col-1"><a href="/alunos/ficha/{{_id}}"
-                                class="bg-info text-light p-2 btn btn-sm">i</a></div>
+                        <div class="col-2">
+                            <div class="row">
+                                <div class="col-6 text-end">
+                                    <a href="/alunos/ficha/{{_id}}"
+                                class="bg-info text-light p-2 btn btn-sm">i</a>
+                                </div>
+                                <div class="col-6">
+                                <a href="/admin/apagarAluno/{{_id}}" method="get"> <button class="btn btn-danger btn-sm">Apagar</button> </a>
+                                </div>
+                            </div>
+                             
+                               </div>
                     </div>
                 </div>
             </div>
@@ -275,6 +285,8 @@
     </div>
 </div>
 
+
+
 <script src="assets/bootstrap.bundle.min.js" class="img-fluid"></script>
 <script>
     function matricular() {
@@ -308,8 +320,5 @@
         let minha_modal = new bootstrap.Modal(el);
         minha_modal.show();
     }
-
-
-
-
+    
 </script>

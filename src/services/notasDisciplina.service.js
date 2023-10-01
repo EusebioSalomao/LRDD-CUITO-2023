@@ -9,3 +9,5 @@ export const findNotasDisciplinaByIdAlunoPerfil = (idAluno) => Notadisciplina.fi
 export const createNotasDisciplinaService = (notasDisciplina) => Notadisciplina(notasDisciplina).save()
 
 export const findNotasDisciplinaByIdClasse = (idClasse) => Notadisciplina.find({idClasse: idClasse}).lean().populate('notas').populate('idMinipauta')
+
+export const findNotasDisciplinaByIdAlunoAndDelete = (idAluno) => Notadisciplina.findOneAndDelete({aluno: idAluno})

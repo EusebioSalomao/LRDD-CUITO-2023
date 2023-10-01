@@ -156,7 +156,7 @@ export const miniPauta = async (req, res) => {
         const alunosTurma = await findAlunosByIdTurma(idTurma)
         //const notasDisciplina = await findNotasDisciplinaByIdMinipautaService(id)
         const usuario = minipauta.idProfessor.usuario
-
+        
         /* PARA ADICIONAR ALUNO NA MINIPAUTA */
         const VeryNotasDisciplina = await findNotasDisciplinaByIdMinipautaService(id)
         alunosTurma.forEach( async aluno => {

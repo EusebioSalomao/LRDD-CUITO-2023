@@ -36,7 +36,7 @@ export const login = async (req, res, next) => {
             const id = user._id
             const token = await generateToken(user._id)
            // Cookies.set("token", token, {expires: 1})
-           res.cookie("access_token", token, { maxAge: 24 * 60 * 1000, httpOnly: true })
+           res.cookie("access_token", token, { maxAge: 24 * 120 * 1000, httpOnly: true })
            //res.json({token: token})
             //return res.send('Usuario existente')
             if (user.eAdmin == 1) {
