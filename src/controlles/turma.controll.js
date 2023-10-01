@@ -113,7 +113,9 @@ export const gerirTurmas = async (req, res) => {
             classe12 = classe.designacao
         }
 
-        res.render('admin/turmas/gerirTurmas', { turmas, ano, classe, curso, classe10, classe11, classe12 })
+        const disciplinas = await findDisciplinaByIdClasse(idClasse)
+
+        res.render('admin/turmas/gerirTurmas', {disciplinas, turmas, ano, classe, curso, classe10, classe11, classe12 })
     } catch (error) {
         res.status(500).send({ mesage: error.mesage })
     }
@@ -227,10 +229,10 @@ export const turmaP = async (req, res) => {
                         
                         if(mini.idProfessor == ""+prof._id && mini.idTurma == t)
                         prof.discActual = mini.nomeDisciplina
-                        console.log({prof})
+                        //console.log({prof})
                     });
+                    professoresDaT.push(prof)
                 }
-                professoresDaT.push(prof)
 
             });
         });
