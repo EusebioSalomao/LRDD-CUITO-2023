@@ -6,6 +6,10 @@ const Disciplina = new Schema({
         type: String,
         required: true
     },
+    tempoSemanal: {
+        type: Number,
+        required: true
+    },
     idClasse: {
         type: Schema.Types.ObjectId,
          ref: "classes",

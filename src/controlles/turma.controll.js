@@ -94,7 +94,7 @@ export const gerirTurmas = async (req, res) => {
         const idAno = req.body.idAno
         const idCurso = req.body.idCurso
         const idClasse = req.body.idClasse
-
+        
         const ano = await findAnoLectivoById(idAno)
         const curso = await findCursoByIdService(idCurso)
         const classe = await findClasseByIdService(idClasse)
@@ -114,7 +114,7 @@ export const gerirTurmas = async (req, res) => {
         }
 
         const disciplinas = await findDisciplinaByIdClasse(idClasse)
-
+        //return res.send({disciplinas})
         res.render('admin/turmas/gerirTurmas', {disciplinas, turmas, ano, classe, curso, classe10, classe11, classe12 })
     } catch (error) {
         res.status(500).send({ mesage: error.mesage })

@@ -49,12 +49,16 @@ export const veryLogin = async (req, res, next) => {
         const authorization = 'Bear '+myToken
         //console.log({authorization}) 
         if(!authorization){
-            return res.status(401).send('Acesso negado!')
+            //return res.status(401).send('Acesso negado!')
+            req.flash('error_msg', 'Tempo esgotado! Inicie novamente a sessão!')
+            res.redirect('/user/login')
         }
         const parts = authorization.split(" ")
         if(parts.length !== 2){
             //O tokem so pode ter duas palabras!: Bear Token
-            return res.status(401).send('Acesso negado!')
+            //return res.status(401).send('Acesso negado!')
+            req.flash('error_msg', 'Tempo esgotado! Inicie novamente a sessão!')
+            res.redirect('/user/login')
         }
         const [schema, token] = parts;
         if(schema !== 'Bear'){
@@ -65,7 +69,9 @@ export const veryLogin = async (req, res, next) => {
         jwt.verify(token, process.env.SECRET_JWT, async (erro, decoded) => {
             if(erro){
                 //Token invalido
-            return res.status(401).send('Acesso negado!')
+           // return res.status(401).send('Acesso negado!')
+           req.flash('error_msg', 'Tempo esgotado! Inicie novamente a sessão!')
+           return res.redirect('/user/login')
             }
             const user = await findUserByIdService(decoded.id);
             if(!user){

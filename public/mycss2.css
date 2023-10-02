@@ -209,3 +209,16 @@
     background-color: rgb(111, 31, 31) !important;
     color: white;
 }
+.mybtn-secondary :hover{
+    background-color: rgb(100, 79, 52) !important;
+}
+.myCard-Disc {
+    display: inline-flex;
+    border: 1px solid #8a7b7b;
+    -webkit-transition: all .2s ease-in; 
+}
+.myCard-Disc:hover{
+    -webkit-transform: scale(1.5) ;
+    background-color: aquamarine;
+    
+}
