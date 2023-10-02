@@ -223,15 +223,14 @@ export const turmaP = async (req, res) => {
         funcionarios.forEach(prof => {
             prof.turmas.forEach(async t => {
                 if (t == idTurma) {
-                    
                     const minip = await findMinipautasByIdTurma(idTurma)
                     minip.forEach(mini => {
                         
                         if(mini.idProfessor == ""+prof._id && mini.idTurma == t)
                         prof.discActual = mini.nomeDisciplina
-                        //console.log({prof})
-                    });
-                    professoresDaT.push(prof)
+                    //console.log({prof})
+                });
+                professoresDaT.push(prof)
                 }
 
             });
