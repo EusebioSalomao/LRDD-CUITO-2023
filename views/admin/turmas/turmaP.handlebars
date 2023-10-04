@@ -54,7 +54,16 @@
 
                                 </div>
                                 <div class="col-8 text-end">
-                            <a href="#"><button class="btn btn-sm mybtn2-danger"> Remover da Turma </button></a>
+                            <form action="/turmas/remProfessor" method="post">
+                            <input type="hidden" name="idProfessor" value="{{_id}}" id="">
+                            <input type="hidden" name="nomeDisciplina" value="{{discActual}}" id="">
+                            <input type="hidden" name="idTurma" value="{{idTurma}}" id="">
+                            <input type="hidden" name="idClasse" value="{{idClasse}}" id="">
+                            <input type="hidden" name="idCurso" value="{{idCurso}}" id="">
+                            <input type="hidden" name="idAno" value="{{idAno}}" id="">
+
+                            <button type="submit" class="btn btn-sm mybtn2-danger"> Remover da Turma </button
+                            ></form>
 
                                 </div>
                             </div>

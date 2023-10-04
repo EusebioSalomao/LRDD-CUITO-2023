@@ -1,3 +1,7 @@
+import ejs from 'ejs'
+import path from 'path'
+import pdf from 'html-pdf'
+
 import { createAlunoService, findAlunoByBIService, findAlunosByIdTurma } from "../services/aluno.service.js";
 import { findAnoLectivoById, findAnoLectivoByEstadoService } from "../services/anoLectivo.service.js";
 import { findAllCandidatosByCursoService, findCandByIdAndUpdateService, findCandByIdService, findCandByNumBIService } from "../services/candidato.service.js";
@@ -5,7 +9,9 @@ import { addTurmaClasseService, findAllClassesByIdCurso, findClasseByIdAndUpdate
 import { findCursoByIdService } from "../services/curso.service.js";
 import { findAllDiscplinasService, findDisciplinaByIdAndUpdateService, findDisciplinaByIdClasse, findDisciplinaByIdService } from "../services/disciplina.service.js";
 import { findAllFuncionariosService, findFuncionarioByIdAndUpdateService, findFuncionariosByIdService } from "../services/funcionario.service.js";
-import { creatMinipautaService, findMinipautasByIdTurma } from "../services/minipauta.service.js";
+import { creatMinipautaService, findMinipautasByIdTurma, findOneMinipautaByIdTurma } from "../services/minipauta.service.js";
+import { createNotaTrimestral } from "../services/notas.service.js";
+import { createNotasDisciplinaService, findNotasDisciplinaByIdMinipautaService } from "../services/notasDisciplina.service.js";
 import { createPautaService } from "../services/pauta.service.js";
 import { createTurmaService, findAllTurmasService, findTurmaByIdCursoService, findTurmaByIdService, findTurmasByIdClassedService } from "../services/turma.service.js";
 import { createUserService } from "../services/user.service.js";
@@ -172,6 +178,172 @@ export const turma = async (req, res) => {
     }
 }
 
+export const miniPauta = async (req, res) => {
+    try {
+        const user = req.user
+        let lancarNota = ''
+        const idTurma = req.params.id
+        const minipauta = await findOneMinipautaByIdTurma(idTurma)
+        const idMinipauta = minipauta._id
+        //const idTurmas = professor.turmas
+        const tdTurmas = await findAllTurmasService()
+        const alunosTurma = await findAlunosByIdTurma(idTurma)
+        const turma = await findTurmaByIdService(idTurma)
+        
+        /* PARA ADICIONAR ALUNO NA MINIPAUTA */
+        const VeryNotasDisciplina = await findNotasDisciplinaByIdMinipautaService(idMinipauta)
+        alunosTurma.forEach( async aluno => {
+            let achado = ''
+            VeryNotasDisciplina.forEach( notaD  => {
+                if(notaD.aluno._id == ''+aluno._id){
+                    achado = 'Achado!'
+                }
+            });
+            if(achado){
+                console.log(achado)
+            }else{
+                console.log('Não achado...')
+                //console.log('Não Achado')
+                let novaNotasDoaluno = {
+                    aluno: aluno._id,
+                    professor: minipauta.idProfessor,
+                    idMinipauta: minipauta._id,
+                    idClasse: minipauta.idClasse,
+                    idTurma: minipauta.idTurma
+                }
+                let notaTrimestral = {}
+                const notasTrimCread = await createNotaTrimestral(notaTrimestral)
+                novaNotasDoaluno.notas = notasTrimCread._id
+                const notasDoAlunoCriada = await createNotasDisciplinaService(novaNotasDoaluno)
+                console.log({notasDoAlunoCriada})
+                /* 
+                */
+            }
+        });
+        const notasDisciplina = await findNotasDisciplinaByIdMinipautaService(idMinipauta)
+        //return res.send(notasDisciplina)
+        
+        /* Numerar */
+        let numeroOrd = 1
+        notasDisciplina.forEach(aluno => {
+            aluno.numeroOrd = numeroOrd++
+        });
+        
+        
+        /* if (user) {
+            
+            if (user._id == usuario) {
+                lancarNota = 'Autorisado'
+            }
+        } */
+        //return res.send({turma})
+
+
+
+        res.render('admin/turmas/minipautaTurma' , { turma, minipauta, alunosTurma, notasDisciplina, lancarNota })
+
+    } catch (error) {
+        res.status(500).send({mesage: error.mesage})
+    }
+}
+export const miniPautaPDF = async (req, res) => {
+    try {
+        //return res.send('Minipauta PDF')
+        const user = req.user
+        let lancarNota = ''
+        const idTurma = req.params.id
+        const minipauta = await findOneMinipautaByIdTurma(idTurma)
+        const idMinipauta = minipauta._id
+        //const idTurmas = professor.turmas
+        const alunosTurma = await findAlunosByIdTurma(idTurma)
+        const turma = await findTurmaByIdService(idTurma)
+        const classe = await findClasseByIdService(turma.idClasse)
+        
+        /* PARA ADICIONAR ALUNO NA MINIPAUTA */
+        const VeryNotasDisciplina = await findNotasDisciplinaByIdMinipautaService(idMinipauta)
+        alunosTurma.forEach( async aluno => {
+            let achado = ''
+            VeryNotasDisciplina.forEach( notaD  => {
+                if(notaD.aluno._id == ''+aluno._id){
+                    achado = 'Achado!'
+                }
+            });
+            if(achado){
+                console.log(achado)
+            }else{
+                console.log('Não achado...')
+                //console.log('Não Achado')
+                let novaNotasDoaluno = {
+                    aluno: aluno._id,
+                    professor: minipauta.idProfessor,
+                    idMinipauta: minipauta._id,
+                    idClasse: minipauta.idClasse,
+                    idTurma: minipauta.idTurma
+                }
+                let notaTrimestral = {}
+                const notasTrimCread = await createNotaTrimestral(notaTrimestral)
+                novaNotasDoaluno.notas = notasTrimCread._id
+                const notasDoAlunoCriada = await createNotasDisciplinaService(novaNotasDoaluno)
+                console.log({notasDoAlunoCriada})
+                /* 
+                */
+            }
+        });
+        const notasDisciplina = await findNotasDisciplinaByIdMinipautaService(idMinipauta)
+        //return res.send(notasDisciplina)
+        
+        /* Numerar */
+        let numeroOrd = 1
+        notasDisciplina.forEach(aluno => {
+            aluno.numeroOrd = numeroOrd++
+        });
+        
+        
+        //return res.send({turma})
+
+
+
+       // res.render('admin/turmas/minipautaTurma' , { turma, minipauta, alunosTurma, notasDisciplina, lancarNota })
+
+       //GERANDO PDF
+       const date = new Date();
+       const diaR = date
+       let dia = date.getDate();
+       let mes = date.toLocaleString('default', { month: 'long' });
+       let ano = date.getFullYear();
+       ejs.renderFile("./views/admin/turmas/minipautaPDF.ejs", { dia:dia, mes:mes, ano:ano, alunosTurma }, (err, html) => {
+        if (err) {
+            return res.send('HOUVE UM ERRO!' + err)
+        } else {
+
+            const options = {
+                format: "A4",
+                orientation: 'Landscape',
+                header: {
+                    height: "15mm"
+                },
+                footer: {
+                    height: "20mm"
+                }
+                
+            }
+            pdf.create(html, options).toFile("./relatorios/"+classe.designacao+"-"+turma.codigo+"-minipauta.pdf", (err, re) => {
+                if (err) {
+                    return res.send('Um erro aconteceu ao guradar lista')
+                } else {
+                     req.flash('success_msg','Arquivo gerado com sucesso! veja na pasta de relatórios em C:/')
+                    res.redirect('/turmas/turma/'+idTurma) 
+                }
+            })
+        }
+    })
+
+    } catch (error) {
+        res.status(500).send({mesage: error.mesage})
+    }
+}
+
+
 export const gerarLista = async (req, res) => {
     try {
         const idTurma = req.params.id
@@ -199,9 +371,11 @@ export const turmaP = async (req, res) => {
         const idTurma = req.params.id
         const turma = await findTurmaByIdService(idTurma)
         const idClasse = turma.idClasse
+        const idAno = turma.idAno
         const classe = await findClasseByIdService(idClasse)
-        const ano = await findAnoLectivoById(turma.idAno)
-        const curso = await findCursoByIdService(turma.idCurso)
+        const ano = await findAnoLectivoById(idAno)
+        const idCurso = turma.idCurso
+        const curso = await findCursoByIdService(idCurso)
         const candidatos = await findAllCandidatosByCursoService(curso.descricao)
         const alunos = await findAlunosByIdTurma(idTurma)
         const tdDisciplinas = await findAllDiscplinasService()
@@ -220,7 +394,7 @@ export const turmaP = async (req, res) => {
                 professores.push(element)
             }
         });
-        funcionarios.forEach(prof => {
+        funcionarios.forEach( prof => {
             prof.turmas.forEach(async t => {
                 if (t == idTurma) {
                     const minip = await findMinipautasByIdTurma(idTurma)
@@ -228,6 +402,10 @@ export const turmaP = async (req, res) => {
                         
                         if(mini.idProfessor == ""+prof._id && mini.idTurma == t)
                         prof.discActual = mini.nomeDisciplina
+                        prof.idTurma = idTurma
+                        prof.idClasse = idClasse
+                        prof.idCurso = idCurso
+                        prof.idAno = idAno
                     //console.log({prof})
                 });
                 professoresDaT.push(prof)
@@ -383,6 +561,81 @@ export const addProfessor = async (req, res) => {
 
             }
         });
+        if (exist == '') {
+            professor.turmas.push(idTurma)
+            professor.disciplinas.push(nomeDisciplina)
+            const minipauta = {
+                nomeDisciplina: nomeDisciplina,
+                idClasse: idClasse,
+                idProfessor: professor._id,
+                idTurma: idTurma,
+                idCurso: idCurso,
+                idAno: idAno
+            }
+
+            const alunos = await findAlunosByIdTurma(idTurma)
+            const alunosMinipauta = []
+            alunos.forEach(element => {
+                alunosMinipauta.push(element._id)
+            });
+            minipauta.alunos = alunosMinipauta
+
+            const novaMinipauta = await creatMinipautaService(minipauta)
+            const idMinipauta = novaMinipauta._id
+            professor.minipautas.push(idMinipauta)
+            const profUpdate = await findFuncionarioByIdAndUpdateService(idProfessor, professor)
+            //disciplina.idProfessor = professor._id
+            //const disciplinaUpdate = await findDisciplinaByIdAndUpdateService(idDisciplina, disciplina)
+            // return res.send("Sucesso!")
+
+            req.flash('success_msg', 'Novo professor adicionado!')
+            res.redirect('/turmas/pturma/' + idTurma)
+        } else {
+            req.flash('error_msg', '' + exist)
+            res.redirect('/turmas/pturma/' + idTurma)
+        }
+
+
+
+    } catch (error) {
+        res.status(500).send({ mesage: error.mesage })
+    }
+}
+export const remProfessor = async (req, res) => {
+    try {
+        const idProfessor = req.body.idProfessor
+        const nomeDisciplina = req.body.nomeDisciplina
+        const idTurma = req.body.idTurma
+        const idClasse = req.body.idClasse
+        const idCurso = req.body.idCurso
+        const idAno = req.body.idAno
+        
+        const turma = await findTurmaByIdService(idTurma)
+        const professor = await findFuncionariosByIdService(idProfessor)
+        //return res.send({professor})
+        //const disciplina = await findDisciplinaByIdService(idDisciplina)
+        
+        res.render('admin/turmas/remProfessor',{professor, nomeDisciplina, turma})
+
+
+
+    } catch (error) {
+        res.status(500).send({ mesage: error.mesage })
+    }
+}
+export const remProfessorSave = async (req, res) => {
+    try {
+        const idProfessor = req.body.idProfessor
+        const nomeDisciplina = req.body.nomeDisciplina
+        const idTurma = req.body.idTurma
+        const idClasse = req.body.idClasse
+        const idCurso = req.body.idCurso
+        const idAno = req.body.idAno
+        
+        const professor = await findFuncionariosByIdService(idProfessor)
+        return res.send({professor})
+        //const disciplina = await findDisciplinaByIdService(idDisciplina)
+       
         if (exist == '') {
             professor.turmas.push(idTurma)
             professor.disciplinas.push(nomeDisciplina)

@@ -11,3 +11,5 @@ export const findAllMinipautasService = () => Minipauta.find().lean()
 export const findMinipautasByIdAnoService = (idAno) => Minipauta.find({idAno: idAno}).lean().populate('idTurma').populate('idClasse')
 
 export const findMinipautasByIdTurma = (idTurma) => Minipauta.find({idTurma: idTurma}).lean().populate("alunos")
+
+export const findOneMinipautaByIdTurma = (idTurma) => Minipauta.findOne({idTurma: idTurma}).lean().populate("alunos")
