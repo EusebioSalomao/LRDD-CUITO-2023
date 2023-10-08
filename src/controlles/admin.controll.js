@@ -247,6 +247,8 @@ export const listaUserPDF = async (req, res) => {
                 
             }
             pdf.create(html, options)
+        res.contentType("application/pdf")
+
         return res.send(pdf)
 
 
