@@ -197,6 +197,7 @@ export const listaUserPDF = async (req, res) => {
         //GERANDO PDF com puppeteer
         const browser = await puppeteer.launch({headless: true})
         const page = await browser.newPage()
+        return res.send('Sucesso!')
         
         await page.goto('http://lrdd-cuito-2023.vercel.app', {
             waitUntil: 'networkidle0'
@@ -220,7 +221,6 @@ export const listaUserPDF = async (req, res) => {
         })
         
         await browser.close()
-        return res.send('Sucesso!')
         res.contentType("application/pdf")
 
         return res.send(pdf)
