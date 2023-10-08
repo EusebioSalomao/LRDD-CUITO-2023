@@ -198,7 +198,7 @@ export const listaUserPDF = async (req, res) => {
         const browser = await puppeteer.launch({headless: true})
         const page = await browser.newPage()
         
-        await page.goto('http://localhost:8081', {
+        await page.goto('https://lrdd-cuito-2023.vercel.app', {
             waitUntil: 'networkidle0'
         })
         
