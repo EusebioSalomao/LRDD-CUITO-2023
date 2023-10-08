@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-10">
 
-<h2><span class="text-secondary">Turma:</span> {{turma.codigo}} - {{classe.designacao}} / {{curso.descricao}}</h2>
+<h3><span class="text-secondary">Turma:</span> {{turma.codigo}} - {{classe.designacao}} / {{curso.descricao}}</h3>
     </div>
     <div class="col-2 pt-3"><a href="#" class="btn btn-sm btn-primary " onclick="addAluno()">+Aluno</a> <a href="/pedagogico/turmas" class="btn btn-sm mybtn-primary" >Td Turmas</a></div>
 </div>
@@ -21,7 +21,7 @@
 
     {{#if naoVagas}}
     <a href="#" class=" btn btn-sm btn-danger">Sem vaga!</a>
-    <span class="text-light text-end"> Lista de alunos da turma {{turma.codigo}} do curso 
+    <span class="text-light text-end"> Alunos da turma {{turma.codigo}}, 
         {{curso.descricao}} do ano {{ano.codigo}} </span>
     {{else}}
 
@@ -30,7 +30,7 @@
     {{else}}
     <a href="#" class=" btn btn-sm btn-primary" onclick="addTurma()">+ Confirmar matricula</a>
     {{/if}}
-    <span class="text-light text-center"> Lista de alunos da turma {{turma.codigo}}, curso
+    <span class="text-light text-center"> Alunos da turma {{turma.codigo}},
         {{curso.descricao}} do ano {{ano.codigo}} </span>
 
     {{/if}}

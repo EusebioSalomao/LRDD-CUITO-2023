@@ -6,7 +6,7 @@ export const createAlunoService = (aluno) => Aluno(aluno).save()
 
 export const findAlunoByBIService = (bi) => Aluno.findOne({numBI: bi}).lean()
 
-export const findAlunosByIdTurma = (idTurma) => Aluno.find({idTurma: idTurma}).lean()
+export const findAlunosByIdTurma = (idTurma) => Aluno.find({idTurma: idTurma}).sort({nome: 1}).lean()
 
 export const findAlunoByIdService = (idAluno) => Aluno.findOne({_id: idAluno}).populate('usuario').lean()
 

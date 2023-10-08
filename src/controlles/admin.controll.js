@@ -1,9 +1,15 @@
+import ejs from 'ejs'
+import path from 'path'
+import pdf from 'html-pdf'
+import puppeteer from 'puppeteer'
+
 import aluno from "../models/aluno.modell.js"
 import { createAlunoService, findAlunoAnDeleteSercice, findAlunoByBIService, findAlunoByIdService } from "../services/aluno.service.js"
 import { findAnoLectivoByEstadoService } from "../services/anoLectivo.service.js"
+import { findAllFuncionariosService } from "../services/funcionario.service.js"
 import { findNotasDisciplinaByIdAluno, findNotasDisciplinaByIdAlunoAndDelete } from "../services/notasDisciplina.service.js"
 import { findTurmaByCodigoServece, findTurmaByIdAndDeleteSerice, findTurmaByIdAndUpdService, findTurmaByIdCursoService, findTurmaByIdService } from "../services/turma.service.js"
-import { createUserService, findByUsernameService, findUserByIdAndDelet, findUserByIdService } from "../services/user.service.js"
+import { createUserService, findAllUsers, findByUsernameService, findUserByIdAndDelet, findUserByIdService } from "../services/user.service.js"
 
 export const admin = async (req, res) => {
     try {
@@ -165,5 +171,94 @@ export const editarTurma = async (req, res) => {
     } catch (error) {
         res.status(500).send({ mesage: error.mesage })
     }
+}
+
+export const listaUserPDF = async (req, res) => {
+    try {
+        let usuarios = await findAllUsers()
+        let funcionarios = await findAllFuncionariosService()
+
+        funcionarios.forEach(funcionario => {
+            usuarios.forEach(usuario => {
+                if(funcionario.usuario == ''+usuario._id){
+                    funcionario.usuario = usuario.username
+                }
+            });
+        });
+
+        const date = new Date();
+        const diaR = date
+        let dia = date.getDate();
+        let mes = date.toLocaleString('default', { month: 'long' });
+        let ano = date.getFullYear();
+        
+        
+        
+        //GERANDO PDF com puppeteer
+        const browser = await puppeteer.launch({headless: true})
+        const page = await browser.newPage()
+        
+        await page.goto('http://localhost:8081', {
+            waitUntil: 'networkidle0'
+        })
+        
+        const pdf = await page.pdf({
+            printBackground: true,
+            format: 'A4',
+            orientation: 'Landscape',
+            path: 'webPDF.pdf',
+            margin: {
+                top: '20px',
+                bottom: '40px',
+                left: '20px',
+                right: '20px'
+            }
+        }).then(_=> {
+            console.log('PDF Criado co sucesso!')
+        }).catch(e => {
+            console.log('Hoive um erro ao criar o PDF!:'+e)
+
+        })
+        
+        await browser.close()
+        res.contentType("application/pdf")
+        //return res.send('Sucesso!')
+
+        return res.send(pdf)
+
+
+        /* 
+        //GERANDO PDF com html-pdf
+       ejs.renderFile("./views/admin/listaUserPDF.ejs", { dia:dia, mes:mes, ano:ano, funcionarios }, (err, html) => {
+        if (err) {
+            return res.send('HOUVE UM ERRO!' + err)
+        } else {
+
+            const options = {
+                format: "A4",
+                orientation: 'portrait',
+                header: {
+                    height: "15mm"
+                },
+                footer: {
+                    height: "20mm"
+                }
+                
+            }
+            pdf.create(html, options).toFile("./relatorios/listaUser.pdf", (err, re) => {
+                if (err) {
+                    return res.send('Um erro aconteceu ao guradar lista')
+                } else {
+                     req.flash('success_msg','Lista de usuarios gerado com sucesso! veja na pasta de relatórios em C:/')
+                    res.redirect('/user/allUsers') 
+                }
+            })
+        }
+    })
+    */
+
+    } catch (error) {
+        res.status(500).send({mesage: error.mesage})
+    } 
 }
 
