@@ -220,8 +220,8 @@ export const listaUserPDF = async (req, res) => {
         })
         
         await browser.close()
+        return res.send('Sucesso!')
         res.contentType("application/pdf")
-        //return res.send('Sucesso!')
 
         return res.send(pdf)
 
