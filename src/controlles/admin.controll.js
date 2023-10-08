@@ -195,7 +195,7 @@ export const listaUserPDF = async (req, res) => {
         
         
         //GERANDO PDF com puppeteer
-        const browser = await puppeteer.launch({headless: faise})
+        const browser = await puppeteer.launch()
         return res.send('Sucesso! 1')
         const page = await browser.newPage()
         
