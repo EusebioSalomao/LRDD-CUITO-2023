@@ -246,16 +246,10 @@ export const listaUserPDF = async (req, res) => {
                 }
                 
             }
-            pdf.create(html, options).toFile("/listaUser.pdf", (err, re) => {
-                if (err) {
-                    return res.send('Um erro aconteceu ao guradar lista')
-                } else {
-                     /* req.flash('success_msg','Lista de usuarios gerado com sucesso! veja na pasta de relatórios em C:/')
-                    res.redirect('/user/allUsers')  */
+            pdf.create(html, options)
         return res.send(pdf)
 
-                }
-            })
+
         }
     })
    
