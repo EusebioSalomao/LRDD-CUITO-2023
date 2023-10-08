@@ -196,8 +196,9 @@ export const listaUserPDF = async (req, res) => {
         
         //GERANDO PDF com puppeteer
         const browser = await puppeteer.launch({
-            executablePath: '/usr/bin/chromium-browser'
-          })
+            headless:false,
+            args: ["--no-sandbox"]
+        });
         return res.send('Sucesso! 2')
         const page = await browser.newPage()
         
