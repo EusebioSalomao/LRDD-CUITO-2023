@@ -195,7 +195,12 @@ export const listaUserPDF = async (req, res) => {
         
         
         //GERANDO PDF com puppeteer
-        const browser = await puppeteer.launch( { headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"]});
+        const browser = await puppeteer.launch(
+            {
+              executablePath: revisionInfo.executablePath,
+              args: ['--no-sandbox', "--disabled-setupid-sandbox"]
+            }
+          )
         return res.send('Sucesso! 2')
         const page = await browser.newPage()
         
