@@ -198,7 +198,7 @@ export const listaUserPDF = async (req, res) => {
         const browser = await puppeteer.launch({headless: true})
         const page = await browser.newPage()
         
-        await page.goto('https://lrdd-cuito-2023.vercel.app', {
+        await page.goto('http://lrdd-cuito-2023.vercel.app', {
             waitUntil: 'networkidle0'
         })
         
@@ -206,7 +206,6 @@ export const listaUserPDF = async (req, res) => {
             printBackground: true,
             format: 'A4',
             orientation: 'Landscape',
-            path: 'webPDF.pdf',
             margin: {
                 top: '20px',
                 bottom: '40px',
