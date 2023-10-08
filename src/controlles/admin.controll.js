@@ -196,12 +196,8 @@ export const listaUserPDF = async (req, res) => {
         
         //GERANDO PDF com puppeteer
         const browser = await puppeteer.launch({
-            headless: false,
-            executablePath: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-            args: ['--start-maximized', '--user-data-dir=C:\\Users\\anirudha tiwari\\AppData\\Local\\Google\\Chrome\\'
-            ]
-            //ignoreDefaultArgs: ['--disable-extensions'] 
-        });
+            ignoreDefaultArgs: ['--disable-extensions'],
+          });
         return res.send('Sucesso! 2')
         const page = await browser.newPage()
         
