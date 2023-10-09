@@ -195,17 +195,13 @@ export const listaUserPDF = async (req, res) => {
         
         
         //GERANDO PDF com puppeteer
-        const browser = await puppeteer.launch().then(_=> {
-            console.log('OK')
-        }).catch(e => {
-            console.log('Erro no launch '+e)
-            return res.send(e)
-        })
+        const browser = await puppeteer.launch({headless: true})
         const page = await browser.newPage()
         
-        await page.goto('http://localhost:8081/turmas/minipauta/64d8e54349aad9b00312412a', {
+        await page.goto('http://localhost:8081', {
             waitUntil: 'networkidle0'
         })
+        return res.send('Sucesso!')
         
         const pdf = await page.pdf({
             printBackground: true,
@@ -227,7 +223,6 @@ export const listaUserPDF = async (req, res) => {
         
         await browser.close()
         res.contentType("application/pdf")
-        //return res.send('Sucesso!')
 
         return res.send(pdf)
 
