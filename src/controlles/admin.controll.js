@@ -195,13 +195,15 @@ export const listaUserPDF = async (req, res) => {
         
         
         //GERANDO PDF com puppeteer
-        /* const browser = await puppeteer.launch({
-            ignoreDefaultArgs: ['--disable-extensions'],
-          });
-        return res.send('Sucesso! 2')
+        const browser = await puppeteer.launch().then(_=> {
+            console.log('OK')
+        }).catch(e => {
+            console.log('Erro no launch '+e)
+            return res.send(e)
+        })
         const page = await browser.newPage()
         
-        await page.goto('http://lrdd-cuito-2023.vercel.app', {
+        await page.goto('http://localhost:8081/turmas/minipauta/64d8e54349aad9b00312412a', {
             waitUntil: 'networkidle0'
         })
         
@@ -209,6 +211,7 @@ export const listaUserPDF = async (req, res) => {
             printBackground: true,
             format: 'A4',
             orientation: 'Landscape',
+            path: 'webPDF.pdf',
             margin: {
                 top: '20px',
                 bottom: '40px',
@@ -224,11 +227,12 @@ export const listaUserPDF = async (req, res) => {
         
         await browser.close()
         res.contentType("application/pdf")
+        //return res.send('Sucesso!')
 
         return res.send(pdf)
 
- */
-        
+
+        /* 
         //GERANDO PDF com html-pdf
        ejs.renderFile("./views/admin/listaUserPDF.ejs", { dia:dia, mes:mes, ano:ano, funcionarios }, (err, html) => {
         if (err) {
@@ -246,15 +250,17 @@ export const listaUserPDF = async (req, res) => {
                 }
                 
             }
-            pdf.create(html, options)
-        res.contentType("application/pdf")
-
-        return res.send(pdf)
-
-
+            pdf.create(html, options).toFile("./relatorios/listaUser.pdf", (err, re) => {
+                if (err) {
+                    return res.send('Um erro aconteceu ao guradar lista')
+                } else {
+                     req.flash('success_msg','Lista de usuarios gerado com sucesso! veja na pasta de relatórios em C:/')
+                    res.redirect('/user/allUsers') 
+                }
+            })
         }
     })
-   
+    */
 
     } catch (error) {
         res.status(500).send({mesage: error.mesage})
