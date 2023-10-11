@@ -244,15 +244,21 @@ export const miniPautaPDF = async (req, res) => {
             const options = {
                 format: "A4",
                 orientation: 'Landscape',
+                margin: {
+                    top: '10px',
+                    bottom: '20px',
+                    left: '20px',
+                    right: '20px'
+                },
                 header: {
                     height: "15mm"
                 },
                 footer: {
-                    height: "20mm"
+                    height: "25mm"
                 }
                 
             }
-            pdf.create(html, options).toFile("./relatorios/"+classe+"-"+turma.codigo+"-minipauta.pdf", (err, re) => {
+            pdf.create(html, options).toFile("./relatorios/minipautas/"+classe+"-"+turma.codigo+"-minipauta.pdf", (err, re) => {
                 if (err) {
                     return res.send('Um erro aconteceu ao guradar lista')
                 } else {

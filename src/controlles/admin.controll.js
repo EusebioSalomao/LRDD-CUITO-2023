@@ -195,13 +195,13 @@ export const listaUserPDF = async (req, res) => {
         
         
         //GERANDO PDF com puppeteer
-        const browser = await puppeteer.launch({headless: false})
+        /* const browser = await puppeteer.launch({headless: false})
         const page = await browser.newPage()
         
         await page.goto('http://localhost:8081', {
             waitUntil: 'networkidle0'
         })
-        return res.send('Sucesso!')
+        //return res.send('Sucesso!')
         
         const pdf = await page.pdf({
             printBackground: true,
@@ -224,10 +224,10 @@ export const listaUserPDF = async (req, res) => {
         await browser.close()
         res.contentType("application/pdf")
 
-        return res.send(pdf)
+        return res.send(pdf) */
 
 
-        /* 
+        
         //GERANDO PDF com html-pdf
        ejs.renderFile("./views/admin/listaUserPDF.ejs", { dia:dia, mes:mes, ano:ano, funcionarios }, (err, html) => {
         if (err) {
@@ -245,7 +245,7 @@ export const listaUserPDF = async (req, res) => {
                 }
                 
             }
-            pdf.create(html, options).toFile("./relatorios/listaUser.pdf", (err, re) => {
+            pdf.create(html, options).toFile("./relatorios/usuarios/listaUserFunc.pdf", (err, re) => {
                 if (err) {
                     return res.send('Um erro aconteceu ao guradar lista')
                 } else {
@@ -255,7 +255,7 @@ export const listaUserPDF = async (req, res) => {
             })
         }
     })
-    */
+   
 
     } catch (error) {
         res.status(500).send({mesage: error.mesage})

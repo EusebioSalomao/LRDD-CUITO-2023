@@ -565,7 +565,17 @@ export const gerarListaAlunos = async (req, res) => {
         const estado = 'Activo'
         const anoLectivo = await findAnoLectivoByEstadoService(estado)
         const anoCod = anoLectivo.codigo
-        const alunos = await findAlunosByIdTurma(idTurma)
+        const alunosT = await findAlunosByIdTurma(idTurma)
+
+        let alunos = []
+        alunosT.forEach(async aluno => {
+            //PENDENTE
+           await aluno.nome.toLowerCase().replace(/(?:^|\s)S/g, (a) => a.toUpperCase())
+            alunos.push(aluno)
+            
+        });
+        return res.send({alunos})
+
         const turma = await findTurmaByIdService(idTurma)
         const turmaCod = turma.codigo
         const idCurso = turma.idCurso
@@ -579,7 +589,23 @@ export const gerarListaAlunos = async (req, res) => {
         if (err) {
             return res.send('HOUVE UM ERRO!' + err)
         } else {
-            pdf.create(html, {}).toFile("https://listaAlunos_"+turmaCod+"-"+classe.designacao+".pdf", (err, re) => {
+            const options = {
+                format: "A4",
+                margin: {
+                    top: '10px',
+                    bottom: '20px',
+                    left: '20px',
+                    right: '20px'
+                },
+                header: {
+                    height: "15mm"
+                },
+                footer: {
+                    height: "25mm"
+                }
+                
+            }
+            pdf.create(html, options).toFile("./relatorios/listas/listaAlunos_"+turmaCod+"-"+classe.designacao+".pdf", (err, re) => {
                 if (err) {
                     return res.send('Um erro aconteceu ao guradar lista')
                 } else {

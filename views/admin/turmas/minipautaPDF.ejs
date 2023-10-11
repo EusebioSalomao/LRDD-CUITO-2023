@@ -6,8 +6,16 @@
     <title>PDF-Teste</title>
     <style>
         body {
-            margin: 2rem;
-            font-family: Arial, Helvetica, sans-serif;
+            margin-left: 7rem;
+            margin-bottom: 3rem;
+                font-family: Arial, Helvetica, sans-serif;
+        }
+        aside {
+            position: relative;
+            top: 2rem;
+            text-align: center;
+            color: #cdcccc;
+
         }
         footer {
             position: absolute;
@@ -117,10 +125,10 @@
         }
 
         .text-size-12 {
-            font-size: 14pt;
+            font-size: 16pt;
         }
         .text-size-14 {
-            font-size: 18pt;
+            font-size: 20pt;
         }
 
         .text-danger {
@@ -136,6 +144,9 @@
 
         .text-start {
             text-align: start;
+        }
+        .text-end {
+            text-align: end;
         }
 
         .text-sub {
@@ -207,6 +218,8 @@
                 <div class="mt-1"> <span>Ano Lectivo:</span> <span class="fw-bold"> <%= anoLectivo %> </span> &shy; &shy; &shy; &shy; <span>
                     <%= classe %> </span> &shy; &shy; &shy; &shy; <span> <span>Turma:</span>  <%= codTurma %> </span> </div>
                 </div>
+                <div class="mt-2 fw-bold text-start"><span>Nome do Professor:</span> <span>____________________________________________</span> </div>
+                <div class=" fw-bold text-start"><span>Disciplina:</span> <span>________________________________</span> </div>
 
             <!-- VITO -->
             <div class="visto">
@@ -222,18 +235,18 @@
 
             <div class="px-5 table">
 
-                <table class="table table-bordered table-sm p-0 mt-0">
+                <table class=" table-bordered table-sm p-0 mt-0">
                     <tbody class="mt-0">
                         <thead class="table-dark mt-0 ">
 
                             <tr class="mb-0">
-                                <td class="bg-rosa" rowspan="2"><span class="mx-0">nº</span></td>
-                                <td class="bg-rosa" rowspan="2"><span class="cab-nome">nome completo</span> </td>
-                                <td class="bg-rosa" colspan="7" >Iº Trimestre</td> 
-                                <td class="bg-rosa" colspan="7">IIº Trimestre</td> 
-                                <td class="bg-rosa" colspan="7">IIIº Trimestre</td> 
-                                <td class="bg-rosa" colspan="3">C. final</td> 
-                                <td class="bg-rosa" rowspan="2"><span>OBS.</span></td> 
+                                <td class="bg-rosa fw-bold" rowspan="2"><span class="mx-0">nº</span></td>
+                                <td class="bg-rosa fw-bold" rowspan="2"><span class="cab-nome">Nome completo</span> </td>
+                                <td class="bg-rosa fw-bold" colspan="7" >Iº Trimestre</td> 
+                                <td class="bg-rosa fw-bold" colspan="7">IIº Trimestre</td> 
+                                <td class="bg-rosa fw-bold" colspan="7">IIIº Trimestre</td> 
+                                <td class="bg-rosa fw-bold" colspan="3">C. final</td> 
+                                <td class="bg-rosa fw-bold" rowspan="2"><span>OBS.</span></td> 
                             </tr>
                             
                             <tr class="mt-0">
@@ -341,17 +354,17 @@
                 </div>
                 <div class="text-center">
         
-                    <span class="m-r">_________________________</span> <span>_________________________</span><br>
-                    <span class="m-r text-light">xxxxxxxxxxxxxxxxxxxxxxxxxxx</span>  <span>MSc. Frederico Sanji Figueiredo</span><br>
+                    <span class="m-r">_________________________</span> <span>___________________________</span><br>
+                    <span class="m-r text-light">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>  <span>MSc. Frederico Sanji Figueiredo</span><br>
 
                 </div>
             </div>
         </div>
     </div>
-    <footer class="text-center">
+    <aside class="text-center">
         <hr>
         <div class="text-sm text-center">Gerado pelo Sistema de Gestão escolar do Licei Rei Ndunduma-Cuito <span>(SIGEB-L290) </span> // <%= dia %> de <%= mes %> de <%= ano %>.</div>
-    </footer>
+    </aside>
 </body>
 
 </html>

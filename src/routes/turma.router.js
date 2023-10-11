@@ -5,17 +5,17 @@ const router = Router();
 
 router.post('/add', veryLogin, eAdmin, addTurma)
 router.get('/', veryLogin, tdTurmas)
-router.post('/gestao', veryLogin, gerirTurmas)
+router.post('/gestao', veryLogin, eAdmin, gerirTurmas)
 router.get('/pTurma/:id', veryLogin, turmaP)
-router.get('/turma/:id', veryLogin, turma)
-router.get('/minipauta/:id', miniPauta)
+router.get('/turma/:id', veryLogin, eAdmin, turma)
+router.get('/minipauta/:id', veryLogin, eAdmin, miniPauta)
 router.get('/miniPautaPDF/:id', veryLogin, miniPautaPDF)
 router.get('/gerarLista/:id', veryLogin, gerarLista)
-router.post('/novaMatricula', veryLogin, novaMatricula)
-router.post('/saveNovaMatricula', veryLogin, saveNovaMatricula)
-router.post('/addProfessor', veryLogin, addProfessor)
-router.post('/remProfessor', veryLogin, remProfessor)
-router.post('/remProfessorSave', veryLogin, remProfessorSave)
+router.post('/novaMatricula', veryLogin, eAdmin, novaMatricula)
+router.post('/saveNovaMatricula', veryLogin, eAdmin, saveNovaMatricula)
+router.post('/addProfessor', veryLogin, eAdmin, addProfessor)
+router.post('/remProfessor', veryLogin, eAdmin, remProfessor)
+router.post('/remProfessorSave', veryLogin, eAdmin, remProfessorSave)
 
 
 export default router;

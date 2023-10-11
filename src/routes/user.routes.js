@@ -7,7 +7,7 @@ import multer from 'multer'
 import { eAdmin, veryLogin } from "../../helpers/eAdmin.js";
 const upload = multer({storage: storage});
 
-router.get('/allUsers', allUsers)
+router.get('/allUsers',veryLogin, eAdmin, allUsers)
 router.get('/login', telaLogin)
 router.post('/login', login)
 router.get('/logout', logout)

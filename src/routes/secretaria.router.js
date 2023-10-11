@@ -16,11 +16,11 @@ router.get('/servicosInfo', servicosInfo)
 router.post('/enviarSolicitacao', veryLogin, upload.single('copOcorrencia'), enviarSolicitacao)
 router.get('/detalheOcorrencia/:id', veryLogin, detalheOcorrencia)
 router.get('/detalheSolic/:id', veryLogin, detalheSolic)
-router.get('/gerirInformacoes', eSecret, gerirInformacoes)
+router.get('/gerirInformacoes',veryLogin, eSecret, gerirInformacoes)
 router.get('/detalheInfo/:id', detalheNoticia)
 router.get('/informase', informase)
-router.get('/novasSolicitacoes', eSecret, novasSolicitacoes)
-router.post('/aceitarSolicitacao', eSecret, aceitarSolicitacao)
+router.get('/novasSolicitacoes',veryLogin, eSecret, novasSolicitacoes)
+router.post('/aceitarSolicitacao',veryLogin, eSecret, aceitarSolicitacao)
 
 
 
